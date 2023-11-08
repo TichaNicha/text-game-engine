@@ -11,6 +11,7 @@ contains treasurechest with coin, coin, coin
 contains ogre
 
 room 4
+contains warchest with sword
 contains dragon
 is exit
 

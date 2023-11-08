@@ -1,6 +1,7 @@
 package gameplay;
 
 import gameplay.characters.Monster;
+import pickups.Pickup;
 
 import java.util.List;
 
@@ -113,6 +114,13 @@ public class Room extends Entity{
             newMonsters[monsters.length] = monster;
             monsters = newMonsters;
         }
+    }
+
+    public void addPickup(Pickup pickup) {
+        if (pickupsInRoom == null || pickupsInRoom.isEmpty()) {
+            pickupsInRoom = new Inventory();
+        }
+        pickupsInRoom.add(pickup);
     }
 
 }

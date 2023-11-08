@@ -10,6 +10,7 @@ import org.antlr.v4.runtime.tree.TerminalNode;
 import pickups.*;
 
 import gameplay.characters.Monster;
+import pickups.openables.Openable;
 import pickups.openables.TreasureChest;
 import pickups.openables.Warchest;
 import pickups.valuables.*;
@@ -17,6 +18,7 @@ import pickups.wieldables.*;
 import pickups.foods.*;
 import pickups.openers.*;
 
+import java.sql.Array;
 import java.util.*;
 
 public class MyGameMapListener extends GameMapBaseListener {
@@ -45,12 +47,12 @@ public class MyGameMapListener extends GameMapBaseListener {
     }
 
     @Override
-    public void exitPickupList(GameMapParser.PickupListContext ctx) {
+    public void exitPickupContents(GameMapParser.PickupContentsContext ctx) {
         // Initialize a list to store pickups
         List<Pickup> pickups = new ArrayList<>();
 
         // Iterate through pickup items in the list
-        for (TerminalNode pickupTerminal : ctx.PICKUP()) {
+        for (TerminalNode pickupTerminal : ctx.pickupList().PICKUP()) {
             String pickupType = pickupTerminal.getText();
             Pickup pickup = createPickupByType(pickupType);
 
@@ -62,14 +64,12 @@ public class MyGameMapListener extends GameMapBaseListener {
         // Add the pickups to the currentContents
         currentContents.addAll(pickups);
         currentRoom.setPickupsInRoom(currentContents);
-
     }
-
 
     @Override
     public void exitOpenableContents(GameMapParser.OpenableContentsContext ctx) {
 
-        this.currentContents = new Inventory();
+        Openable openable = null;
 
         // Process openable contents (e.g., warchest or treasurechest)
         if (ctx.OPENABLE_TYPE() != null) {
@@ -90,14 +90,13 @@ public class MyGameMapListener extends GameMapBaseListener {
             // Create the openable object (e.g., Warchest or TreasureChest)
             if (openableType.equals("warchest")) {
                 Warchest warchest = new Warchest("A blood-stained chest that looks like it's been through a lot", true, openablePickups);
-                currentContents.add(warchest);
+                openable = (warchest);
             } else if (openableType.equals("treasurechest")) {
                 TreasureChest treasureChest = new TreasureChest("A chest full of treasure", true, openablePickups);
-                currentContents.add(treasureChest);
+                openable = (treasureChest);
             }
         }
-        currentRoom.setPickupsInRoom(currentContents);
-
+        currentRoom.addPickup(openable);
     }
 
     @Override

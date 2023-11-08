@@ -85,4 +85,8 @@ public class Inventory
 	public void addAll(List<Pickup> contents) {
 		this.items.addAll(contents);
 	}
+
+	public boolean isEmpty() {
+		return this.items.isEmpty();
+	}
 }
