@@ -4,6 +4,7 @@ contains ogre
 
 room 2
 contains mobile, jewel, axe
+contains zombie
 
 room 3
 contains mead

@@ -129,7 +129,6 @@ public class MyCommandVisitor extends PlayerCommandBaseVisitor<String> {
     public String visitAttackCommand(PlayerCommandParser.AttackCommandContext ctx) {
         if (world.isInBattleMode()){
             String monsterName = ctx.WORD().getText();
-            // Implement the logic to find the monster and attack it
             world.attackMonster(monsterName);
         } else{
             System.out.println("There's nothing to attack!");

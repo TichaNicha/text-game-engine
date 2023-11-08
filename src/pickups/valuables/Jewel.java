@@ -2,6 +2,6 @@ package pickups.valuables;
 
 public class Jewel extends Valuable{
     public Jewel(String desc) {
-        super(desc, 9);
+        super(desc, 13);
     }
 }

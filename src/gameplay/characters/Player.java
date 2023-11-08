@@ -64,12 +64,12 @@ public class Player extends Character
         String adventurerCard = border +
                 header +
                 separator +
-                "║ " + formatLine(playerName) + "║\n" +
-                "║ " + formatLine(playerHP) + "║\n" +
-                "║ " + formatLine(playerConfidence) + "║\n" +
-                "║ " + formatLine(equippedWeapon) + "\n" +
+                " " + formatLine(playerName) + "\n" +
+                " " + formatLine(playerHP) + "\n" +
+                " " + formatLine(playerConfidence) + "\n" +
+                " " + formatLine(equippedWeapon) + "\n" +
                 separator +
-                "║ " + formatLine(inventoryHeader + inventory.toString()) + "\n" +
+                " " + formatLine(inventoryHeader + inventory.toString()) + "\n" +
                 borderBottom;
 
         return adventurerCard;

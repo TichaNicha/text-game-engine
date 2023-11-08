@@ -42,46 +42,65 @@ public class World {
 
     public void attackMonster(String monsterName) {
         // Check if you are in battle mode
-        if (isInBattleMode()) {
-            // Iterate through battle monsters in the current room
-            for (Monster monster : battleMonsters) {
-                if (monster.getId().equalsIgnoreCase(monsterName)) {
-                    // Store player and monster health before the attack
-                    int playerHealthBefore = player.getHp();
-                    int monsterHealthBefore = monster.getHp();
+        if (!isInBattleMode()) {
+            System.out.println("You can't attack monsters when you're not in battle mode!");
+            return; // Exit the method
+        }
 
-                    // Monster attacks the player
-                    int monsterAtk = player.defendAttack(monster);
-
-                    // Player attacks the monster and wields a weapon
-                    String weaponUsed = player.getWeapon().getId(); // Replace with the actual method to get the weapon
-                    int playerAtk = monster.defendAttack(player);
-
-                    // Print the weapon the player uses to attack the monster
-                    System.out.println("Player wields a " + weaponUsed + " to attack the monster for "+playerAtk+" hp!");
-                    System.out.println("The monster attacks the player for "+monsterAtk+" hp!");
-
-                    // Print player health before and after the attack
-                    System.out.println("Player health before the attack: " + playerHealthBefore);
-                    System.out.println("Player health after the attack: " + player.getHp());
-
-                    // Print monster health before and after the attack
-                    System.out.println("Monster health before the attack: " + monsterHealthBefore);
-                    System.out.println("Monster health after the attack: " + monster.getHp());
-
-                    // Check if monster is defeated
-                    if (monster.getHp() <= 0) {
-                        // Player wins the battle
-                        currentRoom.removeMonster(monster);
-                        System.out.println("Player defeats the monster!");
-                    } else if (player.getHp() <= 0) {
-                        // Monster wins the battle
-                        this.gameOver();
-                    }
-                }
+        // Find the monster with the given name
+        Monster targetMonster = null;
+        for (Monster monster : battleMonsters) {
+            if (monster.getId().equalsIgnoreCase(monsterName)) {
+                targetMonster = monster;
+                break; // Exit the loop when the monster is found
             }
         }
+
+        // Check if the target monster was found
+        if (targetMonster == null) {
+            System.out.println("\nNo monster with the name '" + monsterName + "' found in the room!\n");
+            return; // Exit the method
+        }
+
+        // Store player and monster health before the attack
+        int playerHealthBefore = player.getHp();
+        int monsterHealthBefore = targetMonster.getHp();
+
+        // Monster attacks the player
+        int monsterAtk = player.defendAttack(targetMonster);
+
+        String weaponUsed = "";
+
+        // Check if the player has a weapon equipped; if not, equip "Fists of Fury"
+        FistsofFury fists = new FistsofFury("You'll settle this with your bare hands!"
+                ,1, 15);
+        if (player.getWeapon() == null) {
+            player.setWeapon(fists);
+            System.out.println("You equip your fists before attacking!\n");
+        }
+
+        weaponUsed = player.getWeapon().getId();
+
+        // Player attacks the monster
+        int playerAtk = targetMonster.defendAttack(player);
+
+        // Print the weapon the player uses to attack the monster
+        System.out.println("Player wields " + weaponUsed + " to attack the monster for " + playerAtk + " hp!");
+        System.out.println("The monster attacks the player for " + monsterAtk + " hp!\n");
+
+        // Check if monster is defeated
+        if (targetMonster.getHp() <= 0) {
+            // Player wins the battle
+            currentRoom.removeMonster(targetMonster);
+            System.out.println("Player defeats the monster!\n");
+            System.out.println(this.currentRoom);
+            this.mode = PlayMode.explore;
+        } else if (player.getHp() <= 0) {
+            // Monster wins the battle
+            this.gameOver();
+        }
     }
+
 
 
     private void gameOver() {
@@ -445,7 +464,25 @@ public class World {
 
 
     private void processBattleUserInput() {
-        System.out.println("Entering battle mode");
+
+        for (Monster monster : battleMonsters) {
+            // Check if monster's HP is less than 0 and set it to 0
+            if (monster.getHp() < 0) {
+                monster.setHp(0);
+            }
+            System.out.println("Monster: " + monster.getId() + " | HP: " + monster.getHp());
+        }
+
+// Check if the player's HP is less than 0 and set it to 0
+        if (player.getHp() < 0) {
+            player.setHp(0);
+        }
+
+        System.out.println("Player: " + player.getName() + " | HP: " + player.getHp() + " | CF: " + player.getConfidence());
+        System.out.println("----------------------------------------------");
+        System.out.println("What will you do?");
+
+
         Scanner scanner = new Scanner(System.in);
         String stringInput = scanner.nextLine();
 

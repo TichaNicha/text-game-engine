@@ -2,6 +2,6 @@ package pickups.valuables;
 
 public class Ring extends Valuable{
     public Ring(String desc) {
-        super(desc, 2);
+        super(desc, 5);
     }
 }
