@@ -22,22 +22,33 @@ public class MyCommandVisitor extends PlayerCommandBaseVisitor<String> {
 
     @Override
     public String visitPickupCommand(PlayerCommandParser.PickupCommandContext ctx) {
-        String item = ctx.WORD().getText();
-        world.pickup(item);
+        if (world.isInBattleMode()) {
+            System.out.println("You can't use this command when you're in battle!");
+        } else {
+            String item = ctx.WORD().getText();
+            world.pickup(item);
+        }
         return null;
     }
 
     @Override
     public String visitAdmireCommand(PlayerCommandParser.AdmireCommandContext ctx) {
-        String item = ctx.WORD().getText();
-        world.admire(item);
+        if (world.isInBattleMode()) {
+            System.out.println("You can't use this command when you're in battle!");
+        } else {
+            String item = ctx.WORD().getText();
+            world.admire(item);
+        }
         return null;
     }
-
     @Override
     public String visitEatCommand(PlayerCommandParser.EatCommandContext ctx) {
-        String food = ctx.WORD().getText();
-        world.eat(food);
+        if (world.isInBattleMode()) {
+            System.out.println("You can't use this command when you're in battle!");
+        } else {
+            String food = ctx.WORD().getText();
+            world.eat(food);
+        }
         return null;
     }
 
@@ -50,33 +61,55 @@ public class MyCommandVisitor extends PlayerCommandBaseVisitor<String> {
 
     @Override
     public String visitOpenCommand(PlayerCommandParser.OpenCommandContext ctx) {
-        String chest = ctx.WORD().getText();
-        world.open(chest);
+        if (world.isInBattleMode()) {
+            System.out.println("You can't use this command when you're in battle!");
+        } else {
+            String chest = ctx.WORD().getText();
+            world.open(chest);
+        }
         return null;
     }
 
     @Override
     public String visitDoorCommand(PlayerCommandParser.DoorCommandContext ctx) {
-        int doorNumber = Integer.parseInt(ctx.WORD().getText());
-        world.openDoor(doorNumber);
+        if (world.isInBattleMode()) {
+            System.out.println("You can't use this command when you're in battle!");
+        } else {
+            int doorNumber = Integer.parseInt(ctx.WORD().getText());
+            world.openDoor(doorNumber);
+        }
         return null;
     }
 
     @Override
     public String visitExitCommand(PlayerCommandParser.ExitCommandContext ctx) {
-        world.searchExit();
+        if (world.isInBattleMode()) {
+            System.out.println("You can't use this command when you're in battle!");
+        } else {
+            world.searchExit();
+        }
         return null;
     }
 
     @Override
     public String visitDescribeCommand(PlayerCommandParser.DescribeCommandContext ctx) {
-        world.describeRoom();
+        if (world.isInBattleMode()) {
+            System.out.println("You can't use this command when you're in battle!");
+        } else {
+            world.describeRoom();
+
+        }
         return null;
     }
 
     @Override
     public String visitStatsCommand(PlayerCommandParser.StatsCommandContext ctx) {
-        world.displayStats();
+        if (world.isInBattleMode()) {
+            System.out.println("You can't use this command when you're in battle!");
+        } else {
+            world.displayStats();
+
+        }
         return null;
     }
 
@@ -97,15 +130,7 @@ public class MyCommandVisitor extends PlayerCommandBaseVisitor<String> {
         if (world.isInBattleMode()){
             String monsterName = ctx.WORD().getText();
             // Implement the logic to find the monster and attack it
-            boolean successfulAttack = world.attackMonster(monsterName);
-
-            if (successfulAttack) {
-                // Handle a successful attack
-                System.out.println("You successfully attacked the monster!");
-            } else {
-                // Handle an unsuccessful attack (monster not found, etc.)
-                System.out.println("You.. Unsuccessfully attacked the monster.");
-            }
+            world.attackMonster(monsterName);
         } else{
             System.out.println("There's nothing to attack!");
         }

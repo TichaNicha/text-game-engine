@@ -28,6 +28,8 @@ public class MyGameMapListener extends GameMapBaseListener {
     private Inventory currentContents = new Inventory();
     private List<Room> connectingRooms;
 
+    private Monster[] monsters;
+
     @Override
     public void enterRoom(GameMapParser.RoomContext ctx) {
         this.currentRoom = new Room();
@@ -127,11 +129,19 @@ public class MyGameMapListener extends GameMapBaseListener {
         // Add the newRoom to your world
         world.addRoom(selectedRoom.getId(), selectedRoom);
         allRooms.put(selectedRoom.getId(), selectedRoom);
-
-       // System.out.println(selectedRoom);
     }
 
+    @Override
+    public void exitMonsterList(GameMapParser.MonsterListContext ctx) {
+        // Check if the monster type is defined
+        if (ctx.MONSTER() != null) {
+            String monsterType = ctx.MONSTER().toString();
+            Monster monster = createMonsterByType(monsterType);
 
+            if (monster != null) {
+                currentRoom.addMonster(monster); // Add the monster to the current room
+            }
+        }    }
 
     // Override methods to handle other elements in your grammar
     private Pickup createPickupByType(String pickupType) {
@@ -180,13 +190,13 @@ public class MyGameMapListener extends GameMapBaseListener {
     }
     private Monster createMonsterByType(String type) {
         // Create and return the appropriate monster object based on the type
-        if (type.equals("dragon")) {
+        if (type.equals("dragon") || type.equals("[dragon]")) {
             return new Dragon("A beast that dominates the skies and decimates the land.",
                     70, 90, 10);
-        } else if (type.equals("ogre")) {
+        } else if (type.equals("ogre") || type.equals("[ogre]")) {
             return new Ogre("A man-eating monster that preys on weak adventurers.",
-                    30, 50, 5);
-        } else if (type.equals("zombie")) {
+                    30, 100, 5);
+        } else if (type.equals("zombie") || type.equals("[zombie]")) {
             return new Zombie("An undead adventurer significantly weaker than when it used to be alive.",
                     15, 70, 3);
         }

@@ -40,32 +40,49 @@ public class World {
         System.out.println("--------------------------------------------------------");
     }
 
-    public boolean attackMonster(String monsterName) {
+    public void attackMonster(String monsterName) {
         // Check if you are in battle mode
         if (isInBattleMode()) {
             // Iterate through battle monsters in the current room
             for (Monster monster : battleMonsters) {
                 if (monster.getId().equalsIgnoreCase(monsterName)) {
-                    // Monster attacks you
-                    player.defendAttack(monster);
+                    // Store player and monster health before the attack
+                    int playerHealthBefore = player.getHp();
+                    int monsterHealthBefore = monster.getHp();
+
+                    // Monster attacks the player
+                    int monsterAtk = player.defendAttack(monster);
+
+                    // Player attacks the monster and wields a weapon
+                    String weaponUsed = player.getWeapon().getId(); // Replace with the actual method to get the weapon
+                    int playerAtk = monster.defendAttack(player);
+
+                    // Print the weapon the player uses to attack the monster
+                    System.out.println("Player wields a " + weaponUsed + " to attack the monster for "+playerAtk+" hp!");
+                    System.out.println("The monster attacks the player for "+monsterAtk+" hp!");
+
+                    // Print player health before and after the attack
+                    System.out.println("Player health before the attack: " + playerHealthBefore);
+                    System.out.println("Player health after the attack: " + player.getHp());
+
+                    // Print monster health before and after the attack
+                    System.out.println("Monster health before the attack: " + monsterHealthBefore);
+                    System.out.println("Monster health after the attack: " + monster.getHp());
+
                     // Check if monster is defeated
                     if (monster.getHp() <= 0) {
                         // Player wins the battle
                         currentRoom.removeMonster(monster);
-                        return true;
+                        System.out.println("Player defeats the monster!");
                     } else if (player.getHp() <= 0) {
                         // Monster wins the battle
                         this.gameOver();
-                        return true;
                     }
-                    // It's a draw, neither wins
-                    return false;
                 }
             }
         }
-        // Monster not found or not in battle mode
-        return false;
     }
+
 
     private void gameOver() {
         System.out.println("The monster beat you up so bad you are literally dead");
@@ -91,6 +108,8 @@ public class World {
 
     //--------------------------------------------------------
     public void onEnterRoom() {
+        System.out.println(currentRoom);
+
         battleMonsters = new ArrayList<Monster>();
         // Check if the room has any monsters
         if (currentRoom.getMonsters() != null && currentRoom.getMonsters().length > 0) {
@@ -98,6 +117,7 @@ public class World {
             for (Monster monster : currentRoom.getMonsters()){
                 if (monster.appear()){
                     battleMonsters.add(monster);
+                    System.out.println("A monster appeared!");
                 }
             }
             // Monster(s) present, switch to battle mode
@@ -107,7 +127,6 @@ public class World {
             mode = PlayMode.explore;
         }
 
-        System.out.println(currentRoom);
     }
 
     //--------------------------------------------------------
@@ -128,7 +147,7 @@ public class World {
                     processExploreUserInput();
                     break;
                 case battle:
-                    //processBattleUserInput();
+                    processBattleUserInput();
                     break;
             }
 
@@ -426,10 +445,27 @@ public class World {
 
 
     private void processBattleUserInput() {
-        // Parse and process battle mode user input
-        // Handle errors and invalid commands
-        // Update battle state based on player input
-        // Check for battle end conditions (win, lose, run, etc.)
+        System.out.println("Entering battle mode");
+        Scanner scanner = new Scanner(System.in);
+        String stringInput = scanner.nextLine();
+
+        // Create a CharStream from your input
+        CharStream input = CharStreams.fromString(stringInput);
+
+        // Create a lexer and parser
+        PlayerCommandLexer lexer = new PlayerCommandLexer(input);
+        lexer.removeErrorListener(ConsoleErrorListener.INSTANCE);
+
+        CommonTokenStream tokens = new CommonTokenStream(lexer);
+        PlayerCommandParser parser = new PlayerCommandParser(tokens);
+        parser.removeErrorListeners();
+
+        // Parse the command
+        ParseTree tree = parser.command();
+
+        // Implement logic to interpret the parsed command using your visitor
+        MyCommandVisitor visitor = new MyCommandVisitor(this);
+        visitor.visit(tree);
     }
     //--------------------------------------------------------
 }

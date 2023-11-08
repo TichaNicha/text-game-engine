@@ -31,8 +31,7 @@ public class Monster extends Character{
         } else{
             // generate random num btwn 1-100 and compare with appearance chance
             int num = getRandomInt(1,101);
-            //return num <= this.getAppearanceChance();
-            return num >= this.getAppearanceChance();
+            return num <= this.getAppearanceChance();
         }
     }
 
