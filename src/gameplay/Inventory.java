@@ -16,19 +16,26 @@ public class Inventory
 		this.items = new ArrayList<Pickup>();
 	}
 	//------------------------------------
-	public String toString()
-	{	
-		String out = "";		
-		for(Pickup p : items)
-		{
-			if(p!=null)
-			{
-				out+= p+",";
+	public String toString() {
+		StringBuilder out = new StringBuilder();
+
+		for (Pickup p : items) {
+			if (p != null) {
+				out.append(p);
+				out.append(", ");
 			}
 		}
-		if(out.isEmpty()) out = "nothing";
-		return out;
+
+		if (out.length() > 0) {
+			// Remove the trailing comma if there are items
+			out.deleteCharAt(out.length() - 2);
+		} else {
+			out.append("nothing");
+		}
+
+		return out.toString();
 	}
+
 	//------------------------------------
 	public Pickup remove(String id)
 	{
