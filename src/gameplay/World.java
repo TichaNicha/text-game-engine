@@ -309,11 +309,21 @@ public class World {
             // Check if the item is a Valuable
             if (admiredItem instanceof Valuable && !((Valuable) admiredItem).getConsumed()) {
                 Valuable valuable = (Valuable) admiredItem;
+
+                // Admire the valuable item and consume it
+                int previousConfidence = player.getConfidence();
                 player.Admire(valuable);
-                ((Valuable) admiredItem).Consume();
+                valuable.Consume();
+
+                // Display information about the admired item and confidence increase
                 System.out.println("You admired " + valuable);
-                System.out.println(item);
-                System.out.println("Your confidence increased by "+ valuable.getValue() + "display previous vs new confidence value");
+                System.out.println("Item: " + item);
+                System.out.println("Your confidence increased by " + valuable.getValue());
+
+                // Display previous vs new confidence value
+                int newConfidence = player.getConfidence();
+                System.out.println("Previous Confidence: " + previousConfidence);
+                System.out.println("New Confidence: " + newConfidence);
                 System.out.println("--------------------------------------------------------");
             } else {
                 System.out.println("You cannot admire this item.");
@@ -322,6 +332,7 @@ public class World {
             System.out.println("Item not found in your inventory.");
         }
     }
+
 
 
     private void processBattleUserInput() {
