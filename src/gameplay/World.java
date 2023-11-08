@@ -311,7 +311,10 @@ public class World {
                 Valuable valuable = (Valuable) admiredItem;
                 player.Admire(valuable);
                 ((Valuable) admiredItem).Consume();
-                System.out.println("You admired " + item);
+                System.out.println("You admired " + valuable);
+                System.out.println(item);
+                System.out.println("Your confidence increased by "+ valuable.getValue() + "display previous vs new confidence value");
+                System.out.println("--------------------------------------------------------");
             } else {
                 System.out.println("You cannot admire this item.");
             }

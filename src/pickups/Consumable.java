@@ -8,6 +8,10 @@ public abstract class Consumable extends Pickup{
         this.consumed = false;
     }
 
+    public String toString(){
+        return this.getDescription();
+    }
+
     public void Consume() {
         this.consumed = true;
     }
