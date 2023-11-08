@@ -128,7 +128,7 @@ public class MyGameMapListener extends GameMapBaseListener {
         world.addRoom(selectedRoom.getId(), selectedRoom);
         allRooms.put(selectedRoom.getId(), selectedRoom);
 
-        System.out.println(selectedRoom);
+       // System.out.println(selectedRoom);
     }
 
 

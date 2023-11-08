@@ -153,25 +153,41 @@ public class World {
     }
 
     private void eat(String food) {
-        // check if the food is a valid food type (mead, roastboar, bread)
-        if (isValidFoodType(food)) {
-            // Determine the selected food pickup
-            Pickup foodPickup = player.getInventory().select(food);
+        // Get the current player's inventory
+        Inventory playerInventory = player.getInventory();
 
-            if (foodPickup instanceof Food) {
-                Food foodItem = (Food) foodPickup;
-                // Increase the player's health points by the food item's value
-                player.increaseHealth(foodItem.getHpRestored());
+        // Check if the food exists in the player's inventory
+        Pickup foodItem = playerInventory.select(food);
 
-                // Remove the food item from the player's inventory
-                player.getInventory().remove(foodItem);
+        if (foodItem != null) {
+            // Check if the item is a Food
+            if (foodItem instanceof Food) {
+                Food foodToEat = (Food) foodItem;
 
+                // Eat the food item, increase health points, and consume it
+                int previousHealth = player.getHp();
+                player.increaseHealth(foodToEat.getHpRestored());
+                foodToEat.Consume();
+                playerInventory.remove(foodToEat);
+
+                // Display information about the food and health increase
                 System.out.println("You ate " + food + " and gained health points.");
+                System.out.println("Description: " + foodToEat.getDescription());
+                System.out.println("Your health increased by " + foodToEat.getHpRestored());
+
+                // Display previous vs new health value
+                int newHealth = player.getHp();
+                System.out.println("Previous Health: " + previousHealth);
+                System.out.println("New Health: " + newHealth);
+                System.out.println("--------------------------------------------------------");
+            } else {
+                System.out.println("You cannot eat this item.");
             }
         } else {
-            System.out.println("Invalid food item.");
+            System.out.println("Item not found in your inventory.");
         }
     }
+
 
     // Check if the input is a valid food type
     private boolean isValidFoodType(String food) {
@@ -319,7 +335,7 @@ public class World {
 
                 // Display information about the admired item and confidence increase
                 System.out.println("You admired " + valuable);
-                System.out.println("Item: " + valuable.getDescription());
+                System.out.println("Desc: " + valuable.getDescription());
                 System.out.println("Your confidence increased by " + valuable.getValue());
 
                 // Display previous vs new confidence value
