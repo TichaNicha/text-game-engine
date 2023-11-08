@@ -137,10 +137,11 @@ public class World {
                 if (monster.appear()){
                     battleMonsters.add(monster);
                     System.out.println("A monster appeared!");
+                    // Monster(s) present, switch to battle mode
+                    mode = PlayMode.battle;
                 }
             }
-            // Monster(s) present, switch to battle mode
-            mode = PlayMode.battle;
+
         } else {
             // No monsters, stay in explore mode
             mode = PlayMode.explore;

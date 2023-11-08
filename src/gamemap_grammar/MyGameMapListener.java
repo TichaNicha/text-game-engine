@@ -195,7 +195,7 @@ public class MyGameMapListener extends GameMapBaseListener {
                     70, 90, 10);
         } else if (type.equals("ogre") || type.equals("[ogre]")) {
             return new Ogre("A man-eating monster that preys on weak adventurers.",
-                    30, 100, 5);
+                    30, 50, 5);
         } else if (type.equals("zombie") || type.equals("[zombie]")) {
             return new Zombie("An undead adventurer significantly weaker than when it used to be alive.",
                     15, 70, 3);
