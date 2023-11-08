@@ -5,7 +5,8 @@ import org.antlr.v4.runtime.tree.ErrorNode;
 
 
 public class MyCommandVisitor extends PlayerCommandBaseVisitor<String> {
-    private World world; // Reference to the World class
+    private World world; // Reference to the World class]
+    private boolean errorPrinted = false;
 
     public MyCommandVisitor(World world) {
         this.world = world;
@@ -16,7 +17,10 @@ public class MyCommandVisitor extends PlayerCommandBaseVisitor<String> {
     // Handle invalid commands
     @Override
     public String visitErrorNode(ErrorNode node) {
-        System.out.println("Invalid command. Please enter a valid command.");
+        if (!errorPrinted) {
+            System.out.println("Invalid command. Please enter a valid command.");
+            errorPrinted = true;
+        }
         return null;
     }
 

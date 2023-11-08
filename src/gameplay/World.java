@@ -358,6 +358,7 @@ public class World {
 
             changeCurrentRoom(newRoom);
             System.out.println("You opened the door to " + newRoom.getId());
+            this.onEnterRoom();
         } else {
             System.out.println("Invalid door number.");
         }
