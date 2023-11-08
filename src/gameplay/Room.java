@@ -101,6 +101,11 @@ public class Room extends Entity{
         returnStr += "\nRoom No. " + this.getId();
         returnStr += "\nPickups: "+pickupsInRoom;
         returnStr += "\nDoors: "+this.getConnectingRoomsId();
+        if (this.isFinalRoom){
+            returnStr += "\n\nYou notice a warm, inviting glow in the corner of this room...";
+            returnStr += "\nSunlight filters through the cracks in the walls, illuminating your surroundings.";
+            returnStr += "\nIt seems you've reached the exit. Should you venture forth and see what lies beyond?";
+        }
         return returnStr + "\n";
     }
 

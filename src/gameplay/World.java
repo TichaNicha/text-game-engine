@@ -17,6 +17,13 @@ import java.util.StringTokenizer;
 import pickups.foods.*;
 import pickups.wieldables.FistsofFury;
 import pickups.wieldables.Wieldable;
+// Import the generated classes
+import org.antlr.v4.runtime.*;
+import org.antlr.v4.runtime.tree.*;
+import playercommand_grammar.MyCommandVisitor;
+import playercommand_grammar.PlayerCommandLexer;
+import playercommand_grammar.PlayerCommandParser;
+
 
 public class World {
     public enum PlayMode {battle, explore;}
@@ -35,6 +42,7 @@ public class World {
     public void onEnterRoom()
 	{
         // monster may appear
+        // if monster appears change to battle mode, else stay in explore mode
         // description display
         System.out.println(currentRoom);
 	}
@@ -81,84 +89,25 @@ public class World {
     //--------------------------------------------------------
     private void processExploreUserInput() {
         Scanner scanner = new Scanner(System.in);
-        String input = scanner.nextLine();
+        String stringInput = scanner.nextLine();
 
-        String[] tokens = input.split(" "); // Split the input into tokens
+        // Create a CharStream from your input
+        CharStream input = CharStreams.fromString(stringInput);
 
-        if (tokens.length == 0) {
-            System.out.println("Invalid command. Please enter a valid command.");
-            return;
-        }
+        // Create a lexer and parser
+        PlayerCommandLexer lexer = new PlayerCommandLexer(input);
+        CommonTokenStream tokens = new CommonTokenStream(lexer);
+        PlayerCommandParser parser = new PlayerCommandParser(tokens);
 
-        String command = tokens[0].toLowerCase(); // Convert the command to lowercase
+        // Parse the command
+        ParseTree tree = parser.command();
 
-        switch (command) {
-            case "pickup":
-                if (tokens.length < 2) {
-                    System.out.println("Usage: pickup <item>");
-                    return;
-                }
-                String itemToPickup = tokens[1].toLowerCase();
-                pickup(itemToPickup);
-                break;
-            case "admire":
-                if (tokens.length < 2) {
-                    System.out.println("Usage: admire <item>");
-                    return;
-                }
-                String admiredItem = tokens[1].toLowerCase();
-                admire(admiredItem);
-                break;
-            case "eat":
-                if (tokens.length < 2) {
-                    System.out.println("Usage: eat <food>");
-                    return;
-                }
-                String foodToEat = tokens[1].toLowerCase();
-                eat(foodToEat);
-                break;
-            case "wield":
-                if (tokens.length < 2) {
-                    System.out.println("Usage: wield <weapon>");
-                    return;
-                }
-                String weaponToWield = tokens[1].toLowerCase();
-                wield(weaponToWield);
-                break;
-            case "open":
-                if (tokens.length < 2) {
-                    System.out.println("Usage: open <chest>");
-                    return;
-                }
-                String chestToOpen = tokens[1].toLowerCase();
-                open(chestToOpen);
-                break;
-            case "door":
-                if (tokens.length < 2) {
-                    System.out.println("Usage: door <door_number>");
-                    return;
-                }
-                int doorNumber = Integer.parseInt(tokens[1]);
-                openDoor(doorNumber);
-                break;
-            case "exit":
-                searchExit();
-                break;
-            case "describe":
-                describeRoom();
-                break;
-            case "stats":
-                displayStats();
-                break;
-            case "help":
-                displayHelp();
-                break;
-            default:
-                System.out.println("Invalid command. Please enter a valid command.");
-        }
+        // Implement logic to interpret the parsed command using your visitor
+        MyCommandVisitor visitor = new MyCommandVisitor(this);
+        visitor.visit(tree);
+
     }
-
-    private void eat(String food) {
+    public void eat(String food) {
         // Get the current player's inventory
         Inventory playerInventory = player.getInventory();
 
@@ -201,7 +150,7 @@ public class World {
     }
 
 
-    private void wield(String weapon) {
+    public void wield(String weapon) {
         if (weapon.equals("fistsoffury")) {
             // The player can always equip "Fists of Fury"
             Wieldable fistsOfFury = new FistsofFury("You'll settle this with your bare hands!", 1, 15);
@@ -239,7 +188,7 @@ public class World {
     }
 
 
-    private void open(String chest) {
+    public void open(String chest) {
         // Check if either a warchest or treasurechest is in the player's inventory
         Openable targetChest = null;
         Inventory playerInventory = player.getInventory();
@@ -282,11 +231,11 @@ public class World {
         }
     }
 
-    private void changeCurrentRoom(Room newRoom) {
+    public void changeCurrentRoom(Room newRoom) {
         currentRoom = newRoom;
     }
 
-    private void openDoor(int doorNumber) {
+    public void openDoor(int doorNumber) {
         // Get the current room's connecting rooms
         Room[] connectingRooms = currentRoom.getConnectingRooms();
 
@@ -312,7 +261,7 @@ public class World {
 
 
 
-    private void searchExit() {
+    public void searchExit() {
         if (currentRoom.isExit()){
             System.out.println("Wow, you've found the exit in this room!");
             System.out.println("As you slowly open the door...");
@@ -327,16 +276,16 @@ public class World {
         }
     }
 
-    private void describeRoom() {
+    public void describeRoom() {
         System.out.println(currentRoom);
     }
 
-    private void displayStats() {
+    public void displayStats() {
         // Handle the display stats logic
         System.out.println(this.player.stats());;
     }
 
-    private void displayHelp() {
+    public void displayHelp() {
             System.out.println("Explore Mode Commands:");
             System.out.println("--------------------------------------------------------");
             System.out.println("door n - Opens door labeled n and enters the room.");
@@ -355,7 +304,7 @@ public class World {
     }
 
     // Implement the pickup method to handle item pickup
-    private void pickup(String item) {
+    public void pickup(String item) {
         // Get the current room
 
         // Check if the item exists in the room's inventory
@@ -376,7 +325,7 @@ public class World {
     }
 
     // Implement the admire method to handle item admiration
-    private void admire(String item) {
+    public void admire(String item) {
         // Get the current player's inventory
         Inventory playerInventory = player.getInventory();
 
