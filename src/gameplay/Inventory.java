@@ -30,7 +30,7 @@ public class Inventory
 			// Remove the trailing comma if there are items
 			out.deleteCharAt(out.length() - 2);
 		} else {
-			out.append("nothing");
+			return"nothing";
 		}
 
 		return out.toString();

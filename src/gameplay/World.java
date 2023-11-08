@@ -39,6 +39,8 @@ public class World {
         System.out.println("Welcome player " + player);
 
         System.out.println(player);
+        this.currentRoom=rooms.get("1");
+
         this.onEnterRoom();
 
         boolean gameInProgress = true;
@@ -317,7 +319,7 @@ public class World {
 
                 // Display information about the admired item and confidence increase
                 System.out.println("You admired " + valuable);
-                System.out.println("Item: " + item);
+                System.out.println("Item: " + valuable.getDescription());
                 System.out.println("Your confidence increased by " + valuable.getValue());
 
                 // Display previous vs new confidence value

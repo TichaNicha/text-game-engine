@@ -21,7 +21,7 @@ public class Player extends Character
         super("It's you! The player!!!! What else is there to explain..", health);
         this.name=name;
         this.confidence=confidence;
-        this.weapon=new FistsofFury("You'll settle this with your bare hands!",1, 15);
+        this.weapon= null;
         this.inventory = new Inventory();
     }
 
@@ -32,10 +32,10 @@ public class Player extends Character
         String equippedWeapon = "Equipped Weapon: " + this.getWeapon();
         String inventory = "Inventory: " + this.getInventory();
 
-        String border = "╔══════════════════════════════════════════════╗\n";
-        String borderBottom = "╚══════════════════════════════════════════════╝\n";
-        String header = "║              Adventurer Card                 ║\n";
-        String separator = "║----------------------------------------------║\n";
+        String border = "╔════════════════════════════════════════════════╗\n";
+        String borderBottom = "╚════════════════════════════════════════════════╝\n";
+        String header = "║                Adventurer Card                 ║\n";
+        String separator = "║------------------------------------------------║\n";
 
         // combine info
         String adventurerCard = border +
@@ -47,7 +47,7 @@ public class Player extends Character
                 "║ " + formatLine(equippedWeapon) + "║\n" +
                 separator +
                 "║ " + formatLine(inventory) + "║\n" +
-                border;
+                borderBottom;
 
         return adventurerCard;
     }
@@ -58,7 +58,7 @@ public class Player extends Character
 
     // Format each line to a consistent length
     private String formatLine(String line) {
-        int totalLength = 48; // Total width of each line
+        int totalLength = 50; // Total width of each line
         int lineLength = line.length();
         int padding = totalLength - lineLength - 2; // Subtract 2 for the leading and trailing border
 
