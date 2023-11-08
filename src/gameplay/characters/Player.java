@@ -1,6 +1,7 @@
 package gameplay.characters;
 
 import gameplay.Inventory;
+import pickups.Pickup;
 import pickups.valuables.Valuable;
 import pickups.wieldables.FistsofFury;
 import pickups.wieldables.Wieldable;
@@ -30,14 +31,32 @@ public class Player extends Character
         String playerHP = "HP: " + this.getHp();
         String playerConfidence = "Confidence Points: " + this.getConfidence();
         String equippedWeapon = "Equipped Weapon: " + this.getWeapon();
-        String inventory = "Inventory: " + this.getInventory();
+        String inventoryHeader = "Inventory: ";
+
+        Inventory playerInventory = this.getInventory();
+        StringBuilder inventory = new StringBuilder();
+
+        // Iterate through the items in the inventory
+        for (Pickup item : playerInventory.getItems()) {
+            if (item != null) {
+                inventory.append(item);
+                inventory.append(", ");
+            }
+        }
+
+        // Remove the trailing comma if there are items
+        if (inventory.length() > 0) {
+            inventory.deleteCharAt(inventory.length() - 2);
+        } else {
+            inventory.append("nothing");
+        }
 
         String border = "╔════════════════════════════════════════════════╗\n";
         String borderBottom = "╚════════════════════════════════════════════════╝\n";
         String header = "║                Adventurer Card                 ║\n";
         String separator = "║------------------------------------------------║\n";
 
-        // combine info
+        // Combine info, including the formatted inventory
         String adventurerCard = border +
                 header +
                 separator +
@@ -46,7 +65,7 @@ public class Player extends Character
                 "║ " + formatLine(playerConfidence) + "║\n" +
                 "║ " + formatLine(equippedWeapon) + "║\n" +
                 separator +
-                "║ " + formatLine(inventory) + "║\n" +
+                "║ " + formatLine(inventoryHeader + inventory.toString()) + "\n" +
                 borderBottom;
 
         return adventurerCard;
