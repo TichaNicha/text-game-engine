@@ -28,6 +28,16 @@ public interface PlayerCommandListener extends ParseTreeListener {
 	 */
 	void exitCommand(PlayerCommandParser.CommandContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link PlayerCommandParser#exploreCommand}.
+	 * @param ctx the parse tree
+	 */
+	void enterExploreCommand(PlayerCommandParser.ExploreCommandContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link PlayerCommandParser#exploreCommand}.
+	 * @param ctx the parse tree
+	 */
+	void exitExploreCommand(PlayerCommandParser.ExploreCommandContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link PlayerCommandParser#battleCommand}.
 	 * @param ctx the parse tree
 	 */
@@ -38,15 +48,15 @@ public interface PlayerCommandListener extends ParseTreeListener {
 	 */
 	void exitBattleCommand(PlayerCommandParser.BattleCommandContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link PlayerCommandParser#exploreCommand}.
+	 * Enter a parse tree produced by {@link PlayerCommandParser#commonCommands}.
 	 * @param ctx the parse tree
 	 */
-	void enterExploreCommand(PlayerCommandParser.ExploreCommandContext ctx);
+	void enterCommonCommands(PlayerCommandParser.CommonCommandsContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link PlayerCommandParser#exploreCommand}.
+	 * Exit a parse tree produced by {@link PlayerCommandParser#commonCommands}.
 	 * @param ctx the parse tree
 	 */
-	void exitExploreCommand(PlayerCommandParser.ExploreCommandContext ctx);
+	void exitCommonCommands(PlayerCommandParser.CommonCommandsContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link PlayerCommandParser#pickupCommand}.
 	 * @param ctx the parse tree
@@ -147,4 +157,14 @@ public interface PlayerCommandListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitHelpCommand(PlayerCommandParser.HelpCommandContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link PlayerCommandParser#attackCommand}.
+	 * @param ctx the parse tree
+	 */
+	void enterAttackCommand(PlayerCommandParser.AttackCommandContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link PlayerCommandParser#attackCommand}.
+	 * @param ctx the parse tree
+	 */
+	void exitAttackCommand(PlayerCommandParser.AttackCommandContext ctx);
 }

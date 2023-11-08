@@ -6,19 +6,27 @@ start: command;
 // Parser rules
 command: exploreCommand | battleCommand;
 
-battleCommand: ' dd';
-
 exploreCommand:
-    pickupCommand
+    commonCommands
+    | describeCommand
+    | statsCommand
+    | pickupCommand
     | admireCommand
     | eatCommand
     | wieldCommand
     | openCommand
     | doorCommand
-    | exitCommand
-    | describeCommand
-    | statsCommand
-    | helpCommand;
+    | exitCommand;
+
+battleCommand:
+    commonCommands
+    | attackCommand;
+
+commonCommands:
+    helpCommand
+    | wieldCommand;
+
+
 
 pickupCommand: 'pickup' WORD;
 admireCommand: 'admire' WORD;
@@ -30,6 +38,8 @@ exitCommand: 'exit';
 describeCommand: 'describe';
 statsCommand: 'stats';
 helpCommand: 'help';
+
+attackCommand: 'attack' WORD; // Added for battle mode
 
 // Lexer rules
 WORD: ~[ \t\r\n]+;

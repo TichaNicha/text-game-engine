@@ -20,23 +20,25 @@ public class PlayerCommandParser extends Parser {
 		T__0=1, T__1=2, T__2=3, T__3=4, T__4=5, T__5=6, T__6=7, T__7=8, T__8=9, 
 		T__9=10, T__10=11, WORD=12, WS=13, NEWLINE=14;
 	public static final int
-		RULE_start = 0, RULE_command = 1, RULE_battleCommand = 2, RULE_exploreCommand = 3, 
-		RULE_pickupCommand = 4, RULE_admireCommand = 5, RULE_eatCommand = 6, RULE_wieldCommand = 7, 
-		RULE_openCommand = 8, RULE_doorCommand = 9, RULE_exitCommand = 10, RULE_describeCommand = 11, 
-		RULE_statsCommand = 12, RULE_helpCommand = 13;
+		RULE_start = 0, RULE_command = 1, RULE_exploreCommand = 2, RULE_battleCommand = 3, 
+		RULE_commonCommands = 4, RULE_pickupCommand = 5, RULE_admireCommand = 6, 
+		RULE_eatCommand = 7, RULE_wieldCommand = 8, RULE_openCommand = 9, RULE_doorCommand = 10, 
+		RULE_exitCommand = 11, RULE_describeCommand = 12, RULE_statsCommand = 13, 
+		RULE_helpCommand = 14, RULE_attackCommand = 15;
 	private static String[] makeRuleNames() {
 		return new String[] {
-			"start", "command", "battleCommand", "exploreCommand", "pickupCommand", 
-			"admireCommand", "eatCommand", "wieldCommand", "openCommand", "doorCommand", 
-			"exitCommand", "describeCommand", "statsCommand", "helpCommand"
+			"start", "command", "exploreCommand", "battleCommand", "commonCommands", 
+			"pickupCommand", "admireCommand", "eatCommand", "wieldCommand", "openCommand", 
+			"doorCommand", "exitCommand", "describeCommand", "statsCommand", "helpCommand", 
+			"attackCommand"
 		};
 	}
 	public static final String[] ruleNames = makeRuleNames();
 
 	private static String[] makeLiteralNames() {
 		return new String[] {
-			null, "' dd'", "'pickup'", "'admire'", "'eat'", "'wield'", "'open'", 
-			"'door'", "'exit'", "'describe'", "'stats'", "'help'"
+			null, "'pickup'", "'admire'", "'eat'", "'wield'", "'open'", "'door'", 
+			"'exit'", "'describe'", "'stats'", "'help'", "'attack'"
 		};
 	}
 	private static final String[] _LITERAL_NAMES = makeLiteralNames();
@@ -127,7 +129,7 @@ public class PlayerCommandParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(28);
+			setState(32);
 			command();
 			}
 		}
@@ -173,76 +175,23 @@ public class PlayerCommandParser extends Parser {
 		CommandContext _localctx = new CommandContext(_ctx, getState());
 		enterRule(_localctx, 2, RULE_command);
 		try {
-			setState(32);
+			setState(36);
 			_errHandler.sync(this);
-			switch (_input.LA(1)) {
-			case T__1:
-			case T__2:
-			case T__3:
-			case T__4:
-			case T__5:
-			case T__6:
-			case T__7:
-			case T__8:
-			case T__9:
-			case T__10:
+			switch ( getInterpreter().adaptivePredict(_input,0,_ctx) ) {
+			case 1:
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(30);
+				setState(34);
 				exploreCommand();
 				}
 				break;
-			case T__0:
+			case 2:
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(31);
+				setState(35);
 				battleCommand();
 				}
 				break;
-			default:
-				throw new NoViableAltException(this);
-			}
-		}
-		catch (RecognitionException re) {
-			_localctx.exception = re;
-			_errHandler.reportError(this, re);
-			_errHandler.recover(this, re);
-		}
-		finally {
-			exitRule();
-		}
-		return _localctx;
-	}
-
-	@SuppressWarnings("CheckReturnValue")
-	public static class BattleCommandContext extends ParserRuleContext {
-		public BattleCommandContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-		}
-		@Override public int getRuleIndex() { return RULE_battleCommand; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof PlayerCommandListener ) ((PlayerCommandListener)listener).enterBattleCommand(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof PlayerCommandListener ) ((PlayerCommandListener)listener).exitBattleCommand(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof PlayerCommandVisitor ) return ((PlayerCommandVisitor<? extends T>)visitor).visitBattleCommand(this);
-			else return visitor.visitChildren(this);
-		}
-	}
-
-	public final BattleCommandContext battleCommand() throws RecognitionException {
-		BattleCommandContext _localctx = new BattleCommandContext(_ctx, getState());
-		enterRule(_localctx, 4, RULE_battleCommand);
-		try {
-			enterOuterAlt(_localctx, 1);
-			{
-			setState(34);
-			match(T__0);
 			}
 		}
 		catch (RecognitionException re) {
@@ -258,6 +207,15 @@ public class PlayerCommandParser extends Parser {
 
 	@SuppressWarnings("CheckReturnValue")
 	public static class ExploreCommandContext extends ParserRuleContext {
+		public CommonCommandsContext commonCommands() {
+			return getRuleContext(CommonCommandsContext.class,0);
+		}
+		public DescribeCommandContext describeCommand() {
+			return getRuleContext(DescribeCommandContext.class,0);
+		}
+		public StatsCommandContext statsCommand() {
+			return getRuleContext(StatsCommandContext.class,0);
+		}
 		public PickupCommandContext pickupCommand() {
 			return getRuleContext(PickupCommandContext.class,0);
 		}
@@ -278,15 +236,6 @@ public class PlayerCommandParser extends Parser {
 		}
 		public ExitCommandContext exitCommand() {
 			return getRuleContext(ExitCommandContext.class,0);
-		}
-		public DescribeCommandContext describeCommand() {
-			return getRuleContext(DescribeCommandContext.class,0);
-		}
-		public StatsCommandContext statsCommand() {
-			return getRuleContext(StatsCommandContext.class,0);
-		}
-		public HelpCommandContext helpCommand() {
-			return getRuleContext(HelpCommandContext.class,0);
 		}
 		public ExploreCommandContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -309,79 +258,204 @@ public class PlayerCommandParser extends Parser {
 
 	public final ExploreCommandContext exploreCommand() throws RecognitionException {
 		ExploreCommandContext _localctx = new ExploreCommandContext(_ctx, getState());
-		enterRule(_localctx, 6, RULE_exploreCommand);
+		enterRule(_localctx, 4, RULE_exploreCommand);
 		try {
-			setState(46);
+			setState(48);
 			_errHandler.sync(this);
-			switch (_input.LA(1)) {
-			case T__1:
+			switch ( getInterpreter().adaptivePredict(_input,1,_ctx) ) {
+			case 1:
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(36);
-				pickupCommand();
+				setState(38);
+				commonCommands();
 				}
 				break;
-			case T__2:
+			case 2:
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(37);
-				admireCommand();
-				}
-				break;
-			case T__3:
-				enterOuterAlt(_localctx, 3);
-				{
-				setState(38);
-				eatCommand();
-				}
-				break;
-			case T__4:
-				enterOuterAlt(_localctx, 4);
-				{
 				setState(39);
-				wieldCommand();
-				}
-				break;
-			case T__5:
-				enterOuterAlt(_localctx, 5);
-				{
-				setState(40);
-				openCommand();
-				}
-				break;
-			case T__6:
-				enterOuterAlt(_localctx, 6);
-				{
-				setState(41);
-				doorCommand();
-				}
-				break;
-			case T__7:
-				enterOuterAlt(_localctx, 7);
-				{
-				setState(42);
-				exitCommand();
-				}
-				break;
-			case T__8:
-				enterOuterAlt(_localctx, 8);
-				{
-				setState(43);
 				describeCommand();
 				}
 				break;
-			case T__9:
-				enterOuterAlt(_localctx, 9);
+			case 3:
+				enterOuterAlt(_localctx, 3);
 				{
-				setState(44);
+				setState(40);
 				statsCommand();
 				}
 				break;
-			case T__10:
-				enterOuterAlt(_localctx, 10);
+			case 4:
+				enterOuterAlt(_localctx, 4);
+				{
+				setState(41);
+				pickupCommand();
+				}
+				break;
+			case 5:
+				enterOuterAlt(_localctx, 5);
+				{
+				setState(42);
+				admireCommand();
+				}
+				break;
+			case 6:
+				enterOuterAlt(_localctx, 6);
+				{
+				setState(43);
+				eatCommand();
+				}
+				break;
+			case 7:
+				enterOuterAlt(_localctx, 7);
+				{
+				setState(44);
+				wieldCommand();
+				}
+				break;
+			case 8:
+				enterOuterAlt(_localctx, 8);
 				{
 				setState(45);
+				openCommand();
+				}
+				break;
+			case 9:
+				enterOuterAlt(_localctx, 9);
+				{
+				setState(46);
+				doorCommand();
+				}
+				break;
+			case 10:
+				enterOuterAlt(_localctx, 10);
+				{
+				setState(47);
+				exitCommand();
+				}
+				break;
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.reportError(this, re);
+			_errHandler.recover(this, re);
+		}
+		finally {
+			exitRule();
+		}
+		return _localctx;
+	}
+
+	@SuppressWarnings("CheckReturnValue")
+	public static class BattleCommandContext extends ParserRuleContext {
+		public CommonCommandsContext commonCommands() {
+			return getRuleContext(CommonCommandsContext.class,0);
+		}
+		public AttackCommandContext attackCommand() {
+			return getRuleContext(AttackCommandContext.class,0);
+		}
+		public BattleCommandContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_battleCommand; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof PlayerCommandListener ) ((PlayerCommandListener)listener).enterBattleCommand(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof PlayerCommandListener ) ((PlayerCommandListener)listener).exitBattleCommand(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof PlayerCommandVisitor ) return ((PlayerCommandVisitor<? extends T>)visitor).visitBattleCommand(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+
+	public final BattleCommandContext battleCommand() throws RecognitionException {
+		BattleCommandContext _localctx = new BattleCommandContext(_ctx, getState());
+		enterRule(_localctx, 6, RULE_battleCommand);
+		try {
+			setState(52);
+			_errHandler.sync(this);
+			switch (_input.LA(1)) {
+			case T__3:
+			case T__9:
+				enterOuterAlt(_localctx, 1);
+				{
+				setState(50);
+				commonCommands();
+				}
+				break;
+			case T__10:
+				enterOuterAlt(_localctx, 2);
+				{
+				setState(51);
+				attackCommand();
+				}
+				break;
+			default:
+				throw new NoViableAltException(this);
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.reportError(this, re);
+			_errHandler.recover(this, re);
+		}
+		finally {
+			exitRule();
+		}
+		return _localctx;
+	}
+
+	@SuppressWarnings("CheckReturnValue")
+	public static class CommonCommandsContext extends ParserRuleContext {
+		public HelpCommandContext helpCommand() {
+			return getRuleContext(HelpCommandContext.class,0);
+		}
+		public WieldCommandContext wieldCommand() {
+			return getRuleContext(WieldCommandContext.class,0);
+		}
+		public CommonCommandsContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_commonCommands; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof PlayerCommandListener ) ((PlayerCommandListener)listener).enterCommonCommands(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof PlayerCommandListener ) ((PlayerCommandListener)listener).exitCommonCommands(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof PlayerCommandVisitor ) return ((PlayerCommandVisitor<? extends T>)visitor).visitCommonCommands(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+
+	public final CommonCommandsContext commonCommands() throws RecognitionException {
+		CommonCommandsContext _localctx = new CommonCommandsContext(_ctx, getState());
+		enterRule(_localctx, 8, RULE_commonCommands);
+		try {
+			setState(56);
+			_errHandler.sync(this);
+			switch (_input.LA(1)) {
+			case T__9:
+				enterOuterAlt(_localctx, 1);
+				{
+				setState(54);
 				helpCommand();
+				}
+				break;
+			case T__3:
+				enterOuterAlt(_localctx, 2);
+				{
+				setState(55);
+				wieldCommand();
 				}
 				break;
 			default:
@@ -423,13 +497,13 @@ public class PlayerCommandParser extends Parser {
 
 	public final PickupCommandContext pickupCommand() throws RecognitionException {
 		PickupCommandContext _localctx = new PickupCommandContext(_ctx, getState());
-		enterRule(_localctx, 8, RULE_pickupCommand);
+		enterRule(_localctx, 10, RULE_pickupCommand);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(48);
-			match(T__1);
-			setState(49);
+			setState(58);
+			match(T__0);
+			setState(59);
 			match(WORD);
 			}
 		}
@@ -468,13 +542,13 @@ public class PlayerCommandParser extends Parser {
 
 	public final AdmireCommandContext admireCommand() throws RecognitionException {
 		AdmireCommandContext _localctx = new AdmireCommandContext(_ctx, getState());
-		enterRule(_localctx, 10, RULE_admireCommand);
+		enterRule(_localctx, 12, RULE_admireCommand);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(51);
-			match(T__2);
-			setState(52);
+			setState(61);
+			match(T__1);
+			setState(62);
 			match(WORD);
 			}
 		}
@@ -513,13 +587,13 @@ public class PlayerCommandParser extends Parser {
 
 	public final EatCommandContext eatCommand() throws RecognitionException {
 		EatCommandContext _localctx = new EatCommandContext(_ctx, getState());
-		enterRule(_localctx, 12, RULE_eatCommand);
+		enterRule(_localctx, 14, RULE_eatCommand);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(54);
-			match(T__3);
-			setState(55);
+			setState(64);
+			match(T__2);
+			setState(65);
 			match(WORD);
 			}
 		}
@@ -558,13 +632,13 @@ public class PlayerCommandParser extends Parser {
 
 	public final WieldCommandContext wieldCommand() throws RecognitionException {
 		WieldCommandContext _localctx = new WieldCommandContext(_ctx, getState());
-		enterRule(_localctx, 14, RULE_wieldCommand);
+		enterRule(_localctx, 16, RULE_wieldCommand);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(57);
-			match(T__4);
-			setState(58);
+			setState(67);
+			match(T__3);
+			setState(68);
 			match(WORD);
 			}
 		}
@@ -603,13 +677,13 @@ public class PlayerCommandParser extends Parser {
 
 	public final OpenCommandContext openCommand() throws RecognitionException {
 		OpenCommandContext _localctx = new OpenCommandContext(_ctx, getState());
-		enterRule(_localctx, 16, RULE_openCommand);
+		enterRule(_localctx, 18, RULE_openCommand);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(60);
-			match(T__5);
-			setState(61);
+			setState(70);
+			match(T__4);
+			setState(71);
 			match(WORD);
 			}
 		}
@@ -648,13 +722,13 @@ public class PlayerCommandParser extends Parser {
 
 	public final DoorCommandContext doorCommand() throws RecognitionException {
 		DoorCommandContext _localctx = new DoorCommandContext(_ctx, getState());
-		enterRule(_localctx, 18, RULE_doorCommand);
+		enterRule(_localctx, 20, RULE_doorCommand);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(63);
-			match(T__6);
-			setState(64);
+			setState(73);
+			match(T__5);
+			setState(74);
 			match(WORD);
 			}
 		}
@@ -692,12 +766,12 @@ public class PlayerCommandParser extends Parser {
 
 	public final ExitCommandContext exitCommand() throws RecognitionException {
 		ExitCommandContext _localctx = new ExitCommandContext(_ctx, getState());
-		enterRule(_localctx, 20, RULE_exitCommand);
+		enterRule(_localctx, 22, RULE_exitCommand);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(66);
-			match(T__7);
+			setState(76);
+			match(T__6);
 			}
 		}
 		catch (RecognitionException re) {
@@ -734,12 +808,12 @@ public class PlayerCommandParser extends Parser {
 
 	public final DescribeCommandContext describeCommand() throws RecognitionException {
 		DescribeCommandContext _localctx = new DescribeCommandContext(_ctx, getState());
-		enterRule(_localctx, 22, RULE_describeCommand);
+		enterRule(_localctx, 24, RULE_describeCommand);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(68);
-			match(T__8);
+			setState(78);
+			match(T__7);
 			}
 		}
 		catch (RecognitionException re) {
@@ -776,12 +850,12 @@ public class PlayerCommandParser extends Parser {
 
 	public final StatsCommandContext statsCommand() throws RecognitionException {
 		StatsCommandContext _localctx = new StatsCommandContext(_ctx, getState());
-		enterRule(_localctx, 24, RULE_statsCommand);
+		enterRule(_localctx, 26, RULE_statsCommand);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(70);
-			match(T__9);
+			setState(80);
+			match(T__8);
 			}
 		}
 		catch (RecognitionException re) {
@@ -818,12 +892,57 @@ public class PlayerCommandParser extends Parser {
 
 	public final HelpCommandContext helpCommand() throws RecognitionException {
 		HelpCommandContext _localctx = new HelpCommandContext(_ctx, getState());
-		enterRule(_localctx, 26, RULE_helpCommand);
+		enterRule(_localctx, 28, RULE_helpCommand);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(72);
+			setState(82);
+			match(T__9);
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.reportError(this, re);
+			_errHandler.recover(this, re);
+		}
+		finally {
+			exitRule();
+		}
+		return _localctx;
+	}
+
+	@SuppressWarnings("CheckReturnValue")
+	public static class AttackCommandContext extends ParserRuleContext {
+		public TerminalNode WORD() { return getToken(PlayerCommandParser.WORD, 0); }
+		public AttackCommandContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_attackCommand; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof PlayerCommandListener ) ((PlayerCommandListener)listener).enterAttackCommand(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof PlayerCommandListener ) ((PlayerCommandListener)listener).exitAttackCommand(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof PlayerCommandVisitor ) return ((PlayerCommandVisitor<? extends T>)visitor).visitAttackCommand(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+
+	public final AttackCommandContext attackCommand() throws RecognitionException {
+		AttackCommandContext _localctx = new AttackCommandContext(_ctx, getState());
+		enterRule(_localctx, 30, RULE_attackCommand);
+		try {
+			enterOuterAlt(_localctx, 1);
+			{
+			setState(84);
 			match(T__10);
+			setState(85);
+			match(WORD);
 			}
 		}
 		catch (RecognitionException re) {
@@ -838,46 +957,53 @@ public class PlayerCommandParser extends Parser {
 	}
 
 	public static final String _serializedATN =
-		"\u0004\u0001\u000eK\u0002\u0000\u0007\u0000\u0002\u0001\u0007\u0001\u0002"+
+		"\u0004\u0001\u000eX\u0002\u0000\u0007\u0000\u0002\u0001\u0007\u0001\u0002"+
 		"\u0002\u0007\u0002\u0002\u0003\u0007\u0003\u0002\u0004\u0007\u0004\u0002"+
 		"\u0005\u0007\u0005\u0002\u0006\u0007\u0006\u0002\u0007\u0007\u0007\u0002"+
 		"\b\u0007\b\u0002\t\u0007\t\u0002\n\u0007\n\u0002\u000b\u0007\u000b\u0002"+
-		"\f\u0007\f\u0002\r\u0007\r\u0001\u0000\u0001\u0000\u0001\u0001\u0001\u0001"+
-		"\u0003\u0001!\b\u0001\u0001\u0002\u0001\u0002\u0001\u0003\u0001\u0003"+
-		"\u0001\u0003\u0001\u0003\u0001\u0003\u0001\u0003\u0001\u0003\u0001\u0003"+
-		"\u0001\u0003\u0001\u0003\u0003\u0003/\b\u0003\u0001\u0004\u0001\u0004"+
-		"\u0001\u0004\u0001\u0005\u0001\u0005\u0001\u0005\u0001\u0006\u0001\u0006"+
-		"\u0001\u0006\u0001\u0007\u0001\u0007\u0001\u0007\u0001\b\u0001\b\u0001"+
-		"\b\u0001\t\u0001\t\u0001\t\u0001\n\u0001\n\u0001\u000b\u0001\u000b\u0001"+
-		"\f\u0001\f\u0001\r\u0001\r\u0001\r\u0000\u0000\u000e\u0000\u0002\u0004"+
-		"\u0006\b\n\f\u000e\u0010\u0012\u0014\u0016\u0018\u001a\u0000\u0000F\u0000"+
-		"\u001c\u0001\u0000\u0000\u0000\u0002 \u0001\u0000\u0000\u0000\u0004\""+
-		"\u0001\u0000\u0000\u0000\u0006.\u0001\u0000\u0000\u0000\b0\u0001\u0000"+
-		"\u0000\u0000\n3\u0001\u0000\u0000\u0000\f6\u0001\u0000\u0000\u0000\u000e"+
-		"9\u0001\u0000\u0000\u0000\u0010<\u0001\u0000\u0000\u0000\u0012?\u0001"+
-		"\u0000\u0000\u0000\u0014B\u0001\u0000\u0000\u0000\u0016D\u0001\u0000\u0000"+
-		"\u0000\u0018F\u0001\u0000\u0000\u0000\u001aH\u0001\u0000\u0000\u0000\u001c"+
-		"\u001d\u0003\u0002\u0001\u0000\u001d\u0001\u0001\u0000\u0000\u0000\u001e"+
-		"!\u0003\u0006\u0003\u0000\u001f!\u0003\u0004\u0002\u0000 \u001e\u0001"+
-		"\u0000\u0000\u0000 \u001f\u0001\u0000\u0000\u0000!\u0003\u0001\u0000\u0000"+
-		"\u0000\"#\u0005\u0001\u0000\u0000#\u0005\u0001\u0000\u0000\u0000$/\u0003"+
-		"\b\u0004\u0000%/\u0003\n\u0005\u0000&/\u0003\f\u0006\u0000\'/\u0003\u000e"+
-		"\u0007\u0000(/\u0003\u0010\b\u0000)/\u0003\u0012\t\u0000*/\u0003\u0014"+
-		"\n\u0000+/\u0003\u0016\u000b\u0000,/\u0003\u0018\f\u0000-/\u0003\u001a"+
-		"\r\u0000.$\u0001\u0000\u0000\u0000.%\u0001\u0000\u0000\u0000.&\u0001\u0000"+
-		"\u0000\u0000.\'\u0001\u0000\u0000\u0000.(\u0001\u0000\u0000\u0000.)\u0001"+
-		"\u0000\u0000\u0000.*\u0001\u0000\u0000\u0000.+\u0001\u0000\u0000\u0000"+
-		".,\u0001\u0000\u0000\u0000.-\u0001\u0000\u0000\u0000/\u0007\u0001\u0000"+
-		"\u0000\u000001\u0005\u0002\u0000\u000012\u0005\f\u0000\u00002\t\u0001"+
-		"\u0000\u0000\u000034\u0005\u0003\u0000\u000045\u0005\f\u0000\u00005\u000b"+
-		"\u0001\u0000\u0000\u000067\u0005\u0004\u0000\u000078\u0005\f\u0000\u0000"+
-		"8\r\u0001\u0000\u0000\u00009:\u0005\u0005\u0000\u0000:;\u0005\f\u0000"+
-		"\u0000;\u000f\u0001\u0000\u0000\u0000<=\u0005\u0006\u0000\u0000=>\u0005"+
-		"\f\u0000\u0000>\u0011\u0001\u0000\u0000\u0000?@\u0005\u0007\u0000\u0000"+
-		"@A\u0005\f\u0000\u0000A\u0013\u0001\u0000\u0000\u0000BC\u0005\b\u0000"+
-		"\u0000C\u0015\u0001\u0000\u0000\u0000DE\u0005\t\u0000\u0000E\u0017\u0001"+
-		"\u0000\u0000\u0000FG\u0005\n\u0000\u0000G\u0019\u0001\u0000\u0000\u0000"+
-		"HI\u0005\u000b\u0000\u0000I\u001b\u0001\u0000\u0000\u0000\u0002 .";
+		"\f\u0007\f\u0002\r\u0007\r\u0002\u000e\u0007\u000e\u0002\u000f\u0007\u000f"+
+		"\u0001\u0000\u0001\u0000\u0001\u0001\u0001\u0001\u0003\u0001%\b\u0001"+
+		"\u0001\u0002\u0001\u0002\u0001\u0002\u0001\u0002\u0001\u0002\u0001\u0002"+
+		"\u0001\u0002\u0001\u0002\u0001\u0002\u0001\u0002\u0003\u00021\b\u0002"+
+		"\u0001\u0003\u0001\u0003\u0003\u00035\b\u0003\u0001\u0004\u0001\u0004"+
+		"\u0003\u00049\b\u0004\u0001\u0005\u0001\u0005\u0001\u0005\u0001\u0006"+
+		"\u0001\u0006\u0001\u0006\u0001\u0007\u0001\u0007\u0001\u0007\u0001\b\u0001"+
+		"\b\u0001\b\u0001\t\u0001\t\u0001\t\u0001\n\u0001\n\u0001\n\u0001\u000b"+
+		"\u0001\u000b\u0001\f\u0001\f\u0001\r\u0001\r\u0001\u000e\u0001\u000e\u0001"+
+		"\u000f\u0001\u000f\u0001\u000f\u0001\u000f\u0000\u0000\u0010\u0000\u0002"+
+		"\u0004\u0006\b\n\f\u000e\u0010\u0012\u0014\u0016\u0018\u001a\u001c\u001e"+
+		"\u0000\u0000S\u0000 \u0001\u0000\u0000\u0000\u0002$\u0001\u0000\u0000"+
+		"\u0000\u00040\u0001\u0000\u0000\u0000\u00064\u0001\u0000\u0000\u0000\b"+
+		"8\u0001\u0000\u0000\u0000\n:\u0001\u0000\u0000\u0000\f=\u0001\u0000\u0000"+
+		"\u0000\u000e@\u0001\u0000\u0000\u0000\u0010C\u0001\u0000\u0000\u0000\u0012"+
+		"F\u0001\u0000\u0000\u0000\u0014I\u0001\u0000\u0000\u0000\u0016L\u0001"+
+		"\u0000\u0000\u0000\u0018N\u0001\u0000\u0000\u0000\u001aP\u0001\u0000\u0000"+
+		"\u0000\u001cR\u0001\u0000\u0000\u0000\u001eT\u0001\u0000\u0000\u0000 "+
+		"!\u0003\u0002\u0001\u0000!\u0001\u0001\u0000\u0000\u0000\"%\u0003\u0004"+
+		"\u0002\u0000#%\u0003\u0006\u0003\u0000$\"\u0001\u0000\u0000\u0000$#\u0001"+
+		"\u0000\u0000\u0000%\u0003\u0001\u0000\u0000\u0000&1\u0003\b\u0004\u0000"+
+		"\'1\u0003\u0018\f\u0000(1\u0003\u001a\r\u0000)1\u0003\n\u0005\u0000*1"+
+		"\u0003\f\u0006\u0000+1\u0003\u000e\u0007\u0000,1\u0003\u0010\b\u0000-"+
+		"1\u0003\u0012\t\u0000.1\u0003\u0014\n\u0000/1\u0003\u0016\u000b\u0000"+
+		"0&\u0001\u0000\u0000\u00000\'\u0001\u0000\u0000\u00000(\u0001\u0000\u0000"+
+		"\u00000)\u0001\u0000\u0000\u00000*\u0001\u0000\u0000\u00000+\u0001\u0000"+
+		"\u0000\u00000,\u0001\u0000\u0000\u00000-\u0001\u0000\u0000\u00000.\u0001"+
+		"\u0000\u0000\u00000/\u0001\u0000\u0000\u00001\u0005\u0001\u0000\u0000"+
+		"\u000025\u0003\b\u0004\u000035\u0003\u001e\u000f\u000042\u0001\u0000\u0000"+
+		"\u000043\u0001\u0000\u0000\u00005\u0007\u0001\u0000\u0000\u000069\u0003"+
+		"\u001c\u000e\u000079\u0003\u0010\b\u000086\u0001\u0000\u0000\u000087\u0001"+
+		"\u0000\u0000\u00009\t\u0001\u0000\u0000\u0000:;\u0005\u0001\u0000\u0000"+
+		";<\u0005\f\u0000\u0000<\u000b\u0001\u0000\u0000\u0000=>\u0005\u0002\u0000"+
+		"\u0000>?\u0005\f\u0000\u0000?\r\u0001\u0000\u0000\u0000@A\u0005\u0003"+
+		"\u0000\u0000AB\u0005\f\u0000\u0000B\u000f\u0001\u0000\u0000\u0000CD\u0005"+
+		"\u0004\u0000\u0000DE\u0005\f\u0000\u0000E\u0011\u0001\u0000\u0000\u0000"+
+		"FG\u0005\u0005\u0000\u0000GH\u0005\f\u0000\u0000H\u0013\u0001\u0000\u0000"+
+		"\u0000IJ\u0005\u0006\u0000\u0000JK\u0005\f\u0000\u0000K\u0015\u0001\u0000"+
+		"\u0000\u0000LM\u0005\u0007\u0000\u0000M\u0017\u0001\u0000\u0000\u0000"+
+		"NO\u0005\b\u0000\u0000O\u0019\u0001\u0000\u0000\u0000PQ\u0005\t\u0000"+
+		"\u0000Q\u001b\u0001\u0000\u0000\u0000RS\u0005\n\u0000\u0000S\u001d\u0001"+
+		"\u0000\u0000\u0000TU\u0005\u000b\u0000\u0000UV\u0005\f\u0000\u0000V\u001f"+
+		"\u0001\u0000\u0000\u0000\u0004$048";
 	public static final ATN _ATN =
 		new ATNDeserializer().deserialize(_serializedATN.toCharArray());
 	static {

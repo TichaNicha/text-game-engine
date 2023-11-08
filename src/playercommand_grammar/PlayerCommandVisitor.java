@@ -23,17 +23,23 @@ public interface PlayerCommandVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitCommand(PlayerCommandParser.CommandContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link PlayerCommandParser#exploreCommand}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitExploreCommand(PlayerCommandParser.ExploreCommandContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link PlayerCommandParser#battleCommand}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	T visitBattleCommand(PlayerCommandParser.BattleCommandContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link PlayerCommandParser#exploreCommand}.
+	 * Visit a parse tree produced by {@link PlayerCommandParser#commonCommands}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitExploreCommand(PlayerCommandParser.ExploreCommandContext ctx);
+	T visitCommonCommands(PlayerCommandParser.CommonCommandsContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link PlayerCommandParser#pickupCommand}.
 	 * @param ctx the parse tree
@@ -94,4 +100,10 @@ public interface PlayerCommandVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitHelpCommand(PlayerCommandParser.HelpCommandContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link PlayerCommandParser#attackCommand}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitAttackCommand(PlayerCommandParser.AttackCommandContext ctx);
 }

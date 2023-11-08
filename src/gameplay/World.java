@@ -119,9 +119,6 @@ public class World {
         // Parse the command
         ParseTree tree = parser.command();
 
-
-
-
         // Implement logic to interpret the parsed command using your visitor
         MyCommandVisitor visitor = new MyCommandVisitor(this);
         visitor.visit(tree);
@@ -278,9 +275,6 @@ public class World {
         }
     }
 
-
-
-
     public void searchExit() {
         if (currentRoom.isExit()){
             System.out.println("Wow, you've found the exit in this room!");
@@ -379,7 +373,6 @@ public class World {
             System.out.println("Item not found in your inventory.");
         }
     }
-
 
 
     private void processBattleUserInput() {

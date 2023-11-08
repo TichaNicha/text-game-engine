@@ -41,6 +41,18 @@ public class PlayerCommandBaseListener implements PlayerCommandListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterExploreCommand(PlayerCommandParser.ExploreCommandContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitExploreCommand(PlayerCommandParser.ExploreCommandContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterBattleCommand(PlayerCommandParser.BattleCommandContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -53,13 +65,13 @@ public class PlayerCommandBaseListener implements PlayerCommandListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterExploreCommand(PlayerCommandParser.ExploreCommandContext ctx) { }
+	@Override public void enterCommonCommands(PlayerCommandParser.CommonCommandsContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitExploreCommand(PlayerCommandParser.ExploreCommandContext ctx) { }
+	@Override public void exitCommonCommands(PlayerCommandParser.CommonCommandsContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -180,6 +192,18 @@ public class PlayerCommandBaseListener implements PlayerCommandListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitHelpCommand(PlayerCommandParser.HelpCommandContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterAttackCommand(PlayerCommandParser.AttackCommandContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitAttackCommand(PlayerCommandParser.AttackCommandContext ctx) { }
 
 	/**
 	 * {@inheritDoc}
