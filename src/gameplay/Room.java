@@ -100,7 +100,7 @@ public class Room extends Entity{
         returnStr += "\nRoom No. " + this.getId();
         returnStr += "\nPickups: "+pickupsInRoom;
         returnStr += "\nDoors: "+this.getConnectingRoomsId();
-        return returnStr;
+        return returnStr + "\n";
     }
 
     public void addMonster(Monster monster) {

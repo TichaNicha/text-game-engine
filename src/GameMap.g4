@@ -1,12 +1,11 @@
 grammar GameMap;
 
 gamemap: room* connections;
-room: 'room' ID contents? contents? monsters? roomType?;
+room: 'room' ID pickupContents? openableContents? monsters? roomType?;
 
 connections: connection+;
-connection: 'room' ID 'connects' 'to' (ID ',')* ID;
+connection: 'room' ID 'connects' 'to' ID (',' ID)*;
 
-contents: (pickupContents? openableContents?);
 pickupContents: 'contains' pickupList;
 pickupList: PICKUP (',' PICKUP)*;
 openableContents: 'contains' OPENABLE_TYPE 'with' pickupList;

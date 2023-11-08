@@ -6,8 +6,9 @@ room 2
 contains mobile, jewel
 
 room 3
-contains treasurechest with coin, coin, coin
 contains mead
+contains treasurechest with coin, coin, coin
+contains ogre
 
 room 4
 contains dragon

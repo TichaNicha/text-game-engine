@@ -23,7 +23,7 @@ public class MyGameMapListener extends GameMapBaseListener {
     private World world = new World(); // Initialize the world
     private List<Room> allRooms = new ArrayList<>(); // List to store all rooms
     private Room currentRoom = new Room();
-    private Inventory currentContents;
+    private Inventory currentContents = new Inventory();
     private List<Room> connectingRooms;
 
     @Override
@@ -39,17 +39,7 @@ public class MyGameMapListener extends GameMapBaseListener {
     }
 
     @Override
-    public void enterContents(GameMapParser.ContentsContext ctx) {
-        currentContents = new Inventory();
-    }
-
-    @Override
-    public void exitContents(GameMapParser.ContentsContext ctx) {
-        currentRoom.setPickupsInRoom(currentContents);
-    }
-
-    @Override
-    public void enterPickupList(GameMapParser.PickupListContext ctx) {
+    public void exitPickupList(GameMapParser.PickupListContext ctx) {
         // Initialize a list to store pickups
         List<Pickup> pickups = new ArrayList<>();
 
@@ -65,10 +55,13 @@ public class MyGameMapListener extends GameMapBaseListener {
 
         // Add the pickups to the currentContents
         currentContents.addAll(pickups);
+        currentRoom.setPickupsInRoom(currentContents);
+
     }
 
+
     @Override
-    public void enterOpenableContents(GameMapParser.OpenableContentsContext ctx) {
+    public void exitOpenableContents(GameMapParser.OpenableContentsContext ctx) {
         // Process openable contents (e.g., warchest or treasurechest)
         if (ctx.OPENABLE_TYPE() != null) {
             String openableType = ctx.OPENABLE_TYPE().getText();
@@ -94,21 +87,18 @@ public class MyGameMapListener extends GameMapBaseListener {
                 currentContents.add(treasureChest);
             }
         }
+        currentRoom.setPickupsInRoom(currentContents);
+
     }
 
-
-
     @Override
-    public void exitConnection(GameMapParser.ConnectionContext ctx){
+    public void exitConnection(GameMapParser.ConnectionContext ctx) {
         String roomId = ctx.ID(0).getText(); // Get the current room's ID
 
-        // Find the current room by ID in the list of all rooms
-        for (Room room : allRooms) {
-            if (room.getId().equals(roomId)) {
-                currentRoom = room;
-                break; // Found the current room, no need to continue searching
-            }
-        }
+        // Create a new room for this connection
+        Room newRoom = new Room();
+        newRoom.setId(roomId);
+
         // Initialize a list to store connected room objects
         List<Room> connectedRooms = new ArrayList<>();
 
@@ -125,14 +115,16 @@ public class MyGameMapListener extends GameMapBaseListener {
             }
         }
 
-        // Update the currentRoom with the list of connected rooms
-        if (currentRoom != null) {
-            currentRoom.setConnectingRooms(connectedRooms);
-        }
-        // Add the currentRoom to your world
-        world.addRoom(currentRoom.getId(), currentRoom);
-        System.out.println(currentRoom);
+        // Update the newRoom with the list of connected rooms
+        newRoom.setConnectingRooms(connectedRooms);
+
+        // Add the newRoom to your world
+        world.addRoom(newRoom.getId(), newRoom);
+        allRooms.add(newRoom);
+
+        System.out.println(newRoom);
     }
+
 
 
     // Override methods to handle other elements in your grammar
