@@ -1,0 +1,19 @@
+room 1
+contains chalice, coin
+contains ogre
+
+room 2
+contains mobile, jewel
+
+room 3
+contains treasurechest with coin, coin, coin
+contains mead
+
+room 4
+contains dragon
+is exit
+
+room 1 connects to 2, 3, 4
+room 2 connects to 1
+room 3 connects to 1
+room 4 connects to 1
