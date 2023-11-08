@@ -1,6 +1,7 @@
 
 package gameplay;
 
+import gameplay.characters.Monster;
 import gameplay.characters.Player;
 import pickups.Pickup;
 import pickups.openables.Openable;
@@ -10,10 +11,8 @@ import pickups.openers.Key;
 import pickups.openers.Lockpick;
 import pickups.valuables.Valuable;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Scanner;
-import java.util.StringTokenizer;
+import java.util.*;
+
 import pickups.foods.*;
 import pickups.wieldables.FistsofFury;
 import pickups.wieldables.Wieldable;
@@ -36,16 +35,31 @@ public class World {
     Player player;
     PlayMode mode = PlayMode.explore;
 
+    List<Monster> battleMonsters;
+
 
 
     //--------------------------------------------------------
-    public void onEnterRoom()
-	{
-        // monster may appear
-        // if monster appears change to battle mode, else stay in explore mode
-        // description display
+    public void onEnterRoom() {
+        battleMonsters = new ArrayList<Monster>();
+        // Check if the room has any monsters
+        if (currentRoom.getMonsters() != null && currentRoom.getMonsters().length > 0) {
+            // check monster spawn chance
+            for (Monster monster : currentRoom.getMonsters()){
+                if (monster.appear()){
+                    battleMonsters.add(monster);
+                }
+            }
+            // Monster(s) present, switch to battle mode
+            mode = PlayMode.battle;
+        } else {
+            // No monsters, stay in explore mode
+            mode = PlayMode.explore;
+        }
+
         System.out.println(currentRoom);
-	}
+    }
+
     //--------------------------------------------------------
     public void play(Player player)
     {
