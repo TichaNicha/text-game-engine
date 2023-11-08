@@ -68,6 +68,9 @@ public class MyGameMapListener extends GameMapBaseListener {
 
     @Override
     public void exitOpenableContents(GameMapParser.OpenableContentsContext ctx) {
+
+        this.currentContents = new Inventory();
+
         // Process openable contents (e.g., warchest or treasurechest)
         if (ctx.OPENABLE_TYPE() != null) {
             String openableType = ctx.OPENABLE_TYPE().getText();
