@@ -31,7 +31,6 @@ describeCommand: 'describe';
 statsCommand: 'stats';
 helpCommand: 'help';
 
-
 // Lexer rules
 WORD: .+;
 
@@ -39,5 +38,4 @@ WORD: .+;
 WS: [ \t\r\n]+ -> skip;
 NEWLINE: '\r'? '\n'; // return newlines to parser (is end-statement signal)
 
-// Define error handling for invalid commands
-InvalidCommand: . {System.err.println("Invalid command. Please enter a valid command.");};
+InvalidCommand: . { $channel = HIDDEN; System.err.close(); } ;

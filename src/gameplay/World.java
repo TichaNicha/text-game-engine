@@ -96,11 +96,17 @@ public class World {
 
         // Create a lexer and parser
         PlayerCommandLexer lexer = new PlayerCommandLexer(input);
+        lexer.removeErrorListener(ConsoleErrorListener.INSTANCE);
+
         CommonTokenStream tokens = new CommonTokenStream(lexer);
         PlayerCommandParser parser = new PlayerCommandParser(tokens);
+        parser.removeErrorListeners();
 
         // Parse the command
         ParseTree tree = parser.command();
+
+
+
 
         // Implement logic to interpret the parsed command using your visitor
         MyCommandVisitor visitor = new MyCommandVisitor(this);
