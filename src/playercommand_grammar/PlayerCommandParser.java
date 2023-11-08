@@ -18,8 +18,7 @@ public class PlayerCommandParser extends Parser {
 		new PredictionContextCache();
 	public static final int
 		T__0=1, T__1=2, T__2=3, T__3=4, T__4=5, T__5=6, T__6=7, T__7=8, T__8=9, 
-		T__9=10, T__10=11, PICKUP=12, WIELDABLE=13, CONSUMABLE=14, VALUABLE=15, 
-		FOOD=16, OPENER=17, OPENABLE=18, WORD=19, INT=20, WS=21, NEWLINE=22, InvalidCommand=23;
+		T__9=10, T__10=11, WORD=12, WS=13, NEWLINE=14, InvalidCommand=15;
 	public static final int
 		RULE_start = 0, RULE_command = 1, RULE_battleCommand = 2, RULE_exploreCommand = 3, 
 		RULE_pickupCommand = 4, RULE_admireCommand = 5, RULE_eatCommand = 6, RULE_wieldCommand = 7, 
@@ -44,8 +43,7 @@ public class PlayerCommandParser extends Parser {
 	private static String[] makeSymbolicNames() {
 		return new String[] {
 			null, null, null, null, null, null, null, null, null, null, null, null, 
-			"PICKUP", "WIELDABLE", "CONSUMABLE", "VALUABLE", "FOOD", "OPENER", "OPENABLE", 
-			"WORD", "INT", "WS", "NEWLINE", "InvalidCommand"
+			"WORD", "WS", "NEWLINE", "InvalidCommand"
 		};
 	}
 	private static final String[] _SYMBOLIC_NAMES = makeSymbolicNames();
@@ -403,7 +401,7 @@ public class PlayerCommandParser extends Parser {
 
 	@SuppressWarnings("CheckReturnValue")
 	public static class PickupCommandContext extends ParserRuleContext {
-		public TerminalNode PICKUP() { return getToken(PlayerCommandParser.PICKUP, 0); }
+		public TerminalNode WORD() { return getToken(PlayerCommandParser.WORD, 0); }
 		public PickupCommandContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
@@ -432,7 +430,7 @@ public class PlayerCommandParser extends Parser {
 			setState(48);
 			match(T__1);
 			setState(49);
-			match(PICKUP);
+			match(WORD);
 			}
 		}
 		catch (RecognitionException re) {
@@ -448,7 +446,7 @@ public class PlayerCommandParser extends Parser {
 
 	@SuppressWarnings("CheckReturnValue")
 	public static class AdmireCommandContext extends ParserRuleContext {
-		public TerminalNode PICKUP() { return getToken(PlayerCommandParser.PICKUP, 0); }
+		public TerminalNode WORD() { return getToken(PlayerCommandParser.WORD, 0); }
 		public AdmireCommandContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
@@ -477,7 +475,7 @@ public class PlayerCommandParser extends Parser {
 			setState(51);
 			match(T__2);
 			setState(52);
-			match(PICKUP);
+			match(WORD);
 			}
 		}
 		catch (RecognitionException re) {
@@ -493,7 +491,7 @@ public class PlayerCommandParser extends Parser {
 
 	@SuppressWarnings("CheckReturnValue")
 	public static class EatCommandContext extends ParserRuleContext {
-		public TerminalNode PICKUP() { return getToken(PlayerCommandParser.PICKUP, 0); }
+		public TerminalNode WORD() { return getToken(PlayerCommandParser.WORD, 0); }
 		public EatCommandContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
@@ -522,7 +520,7 @@ public class PlayerCommandParser extends Parser {
 			setState(54);
 			match(T__3);
 			setState(55);
-			match(PICKUP);
+			match(WORD);
 			}
 		}
 		catch (RecognitionException re) {
@@ -538,7 +536,7 @@ public class PlayerCommandParser extends Parser {
 
 	@SuppressWarnings("CheckReturnValue")
 	public static class WieldCommandContext extends ParserRuleContext {
-		public TerminalNode PICKUP() { return getToken(PlayerCommandParser.PICKUP, 0); }
+		public TerminalNode WORD() { return getToken(PlayerCommandParser.WORD, 0); }
 		public WieldCommandContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
@@ -567,7 +565,7 @@ public class PlayerCommandParser extends Parser {
 			setState(57);
 			match(T__4);
 			setState(58);
-			match(PICKUP);
+			match(WORD);
 			}
 		}
 		catch (RecognitionException re) {
@@ -583,7 +581,7 @@ public class PlayerCommandParser extends Parser {
 
 	@SuppressWarnings("CheckReturnValue")
 	public static class OpenCommandContext extends ParserRuleContext {
-		public TerminalNode PICKUP() { return getToken(PlayerCommandParser.PICKUP, 0); }
+		public TerminalNode WORD() { return getToken(PlayerCommandParser.WORD, 0); }
 		public OpenCommandContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
@@ -612,7 +610,7 @@ public class PlayerCommandParser extends Parser {
 			setState(60);
 			match(T__5);
 			setState(61);
-			match(PICKUP);
+			match(WORD);
 			}
 		}
 		catch (RecognitionException re) {
@@ -628,7 +626,7 @@ public class PlayerCommandParser extends Parser {
 
 	@SuppressWarnings("CheckReturnValue")
 	public static class DoorCommandContext extends ParserRuleContext {
-		public TerminalNode INT() { return getToken(PlayerCommandParser.INT, 0); }
+		public TerminalNode WORD() { return getToken(PlayerCommandParser.WORD, 0); }
 		public DoorCommandContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
@@ -657,7 +655,7 @@ public class PlayerCommandParser extends Parser {
 			setState(63);
 			match(T__6);
 			setState(64);
-			match(INT);
+			match(WORD);
 			}
 		}
 		catch (RecognitionException re) {
@@ -840,7 +838,7 @@ public class PlayerCommandParser extends Parser {
 	}
 
 	public static final String _serializedATN =
-		"\u0004\u0001\u0017K\u0002\u0000\u0007\u0000\u0002\u0001\u0007\u0001\u0002"+
+		"\u0004\u0001\u000fK\u0002\u0000\u0007\u0000\u0002\u0001\u0007\u0001\u0002"+
 		"\u0002\u0007\u0002\u0002\u0003\u0007\u0003\u0002\u0004\u0007\u0004\u0002"+
 		"\u0005\u0007\u0005\u0002\u0006\u0007\u0006\u0002\u0007\u0007\u0007\u0002"+
 		"\b\u0007\b\u0002\t\u0007\t\u0002\n\u0007\n\u0002\u000b\u0007\u000b\u0002"+
@@ -876,7 +874,7 @@ public class PlayerCommandParser extends Parser {
 		"8\r\u0001\u0000\u0000\u00009:\u0005\u0005\u0000\u0000:;\u0005\f\u0000"+
 		"\u0000;\u000f\u0001\u0000\u0000\u0000<=\u0005\u0006\u0000\u0000=>\u0005"+
 		"\f\u0000\u0000>\u0011\u0001\u0000\u0000\u0000?@\u0005\u0007\u0000\u0000"+
-		"@A\u0005\u0014\u0000\u0000A\u0013\u0001\u0000\u0000\u0000BC\u0005\b\u0000"+
+		"@A\u0005\f\u0000\u0000A\u0013\u0001\u0000\u0000\u0000BC\u0005\b\u0000"+
 		"\u0000C\u0015\u0001\u0000\u0000\u0000DE\u0005\t\u0000\u0000E\u0017\u0001"+
 		"\u0000\u0000\u0000FG\u0005\n\u0000\u0000G\u0019\u0001\u0000\u0000\u0000"+
 		"HI\u0005\u000b\u0000\u0000I\u001b\u0001\u0000\u0000\u0000\u0002 .";

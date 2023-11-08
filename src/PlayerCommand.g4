@@ -20,29 +20,20 @@ exploreCommand:
     | statsCommand
     | helpCommand;
 
-pickupCommand: 'pickup' PICKUP;
-admireCommand: 'admire' PICKUP;
-eatCommand: 'eat' PICKUP;
-wieldCommand: 'wield' PICKUP;
-openCommand: 'open' PICKUP;
-doorCommand: 'door' INT;
+pickupCommand: 'pickup' WORD;
+admireCommand: 'admire' WORD;
+eatCommand: 'eat' WORD;
+wieldCommand: 'wield' WORD;
+openCommand: 'open' WORD;
+doorCommand: 'door' WORD;
 exitCommand: 'exit';
 describeCommand: 'describe';
 statsCommand: 'stats';
 helpCommand: 'help';
 
 
-PICKUP: WIELDABLE | CONSUMABLE | OPENER | VALUABLE | OPENABLE;
-WIELDABLE: 'axe' | 'fistsoffury' | 'sword';
-CONSUMABLE: VALUABLE | FOOD;
-VALUABLE: 'chalice' | 'moneybag' | 'ring' | 'coin' | 'goldbars' | 'jewel' | 'mobile';
-FOOD: 'mead' | 'roastboar' | 'bread';
-OPENER: 'key' | 'lockpick';
-OPENABLE: 'warchest' | 'treasurechest';
-
 // Lexer rules
-WORD: [a-zA-Z]+;
-INT: [0-9]+;
+WORD: .+;
 
 // Skip spaces and tabs
 WS: [ \t\r\n]+ -> skip;
