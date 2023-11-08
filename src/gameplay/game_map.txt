@@ -1,5 +1,5 @@
 room 1
-contains chalice, coin
+contains chalice, coin, key, lockpick
 contains ogre
 
 room 2

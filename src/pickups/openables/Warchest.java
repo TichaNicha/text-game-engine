@@ -25,6 +25,7 @@ public class Warchest extends Openable{
         if (pickup instanceof Lockpick) {
             if (isLocked()) {
                 System.out.println("You successfully unlock the warchest, however you broke a lockpick in the process.");
+                System.out.println("It contains: "+this.getPickupContents());
                 setLocked(false); // Unlock the chest
                 // Add the contents of the chest to the player's inventory
                 this.addContentsToInventory(inventory);

@@ -36,6 +36,10 @@ public class Player extends Character
         Inventory playerInventory = this.getInventory();
         StringBuilder inventory = new StringBuilder();
 
+        if (this.getWeapon() == null){
+            equippedWeapon = "Equipped Weapon: nothing";
+        }
+
         // Iterate through the items in the inventory
         for (Pickup item : playerInventory.getItems()) {
             if (item != null) {

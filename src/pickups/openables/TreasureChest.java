@@ -23,7 +23,8 @@ public class TreasureChest extends Openable {
     public void unlockWith(Opener pickup, Inventory inventory) {
         if (pickup instanceof Key) {
             if (isLocked()) {
-                System.out.println("You successfully unlock the treasure chest with a key.");
+                System.out.println("You successfully unlock the treasure chest with a key. The key gets stuck in the hole so you can't use it anymore.");
+                System.out.println("It contains: "+this.getPickupContents());
                 setLocked(false); // Unlock the chest
                 // Add the contents of the chest to the player's inventory
                 this.addContentsToInventory(inventory);

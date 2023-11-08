@@ -3,6 +3,11 @@ package gameplay;
 
 import gameplay.characters.Player;
 import pickups.Pickup;
+import pickups.openables.Openable;
+import pickups.openables.TreasureChest;
+import pickups.openables.Warchest;
+import pickups.openers.Key;
+import pickups.openers.Lockpick;
 import pickups.valuables.Valuable;
 
 import java.util.HashMap;
@@ -235,7 +240,46 @@ public class World {
 
 
     private void open(String chest) {
-        // Handle the open logic
+        // Check if either a warchest or treasurechest is in the player's inventory
+        Openable targetChest = null;
+        Inventory playerInventory = player.getInventory();
+
+        for (Pickup pickup : playerInventory.getItems()) {
+            if (pickup instanceof Warchest || pickup instanceof TreasureChest) {
+                targetChest = (Openable) pickup;
+                break;
+            }
+        }
+
+        if (targetChest == null) {
+            System.out.println("You don't have any chests!");
+            return;
+        }
+
+        // Handle opening the chest based on its type
+        if (targetChest instanceof Warchest) {
+            Warchest warchest = (Warchest) targetChest;
+            // Check if the player has a Lockpick
+            Lockpick lockpick = (Lockpick) playerInventory.select("lockpick");
+            if (lockpick != null) {
+                warchest.unlockWith(lockpick, playerInventory);
+                playerInventory.remove(lockpick);
+                playerInventory.remove(warchest);
+            } else {
+                System.out.println("You need a lockpick to unlock this warchest.");
+            }
+        } else if (targetChest instanceof TreasureChest) {
+            TreasureChest treasureChest = (TreasureChest) targetChest;
+            // Check if the player has a Key
+            Key key = (Key) playerInventory.select("key");
+            if (key != null) {
+                treasureChest.unlockWith(key, playerInventory);
+                playerInventory.remove(key);
+                playerInventory.remove(treasureChest);
+            } else {
+                System.out.println("You need the correct key to unlock this treasure chest.");
+            }
+        }
     }
 
     private void changeCurrentRoom(Room newRoom) {
