@@ -63,7 +63,7 @@ public class Player extends Character
                 "║ " + formatLine(playerName) + "║\n" +
                 "║ " + formatLine(playerHP) + "║\n" +
                 "║ " + formatLine(playerConfidence) + "║\n" +
-                "║ " + formatLine(equippedWeapon) + "║\n" +
+                "║ " + formatLine(equippedWeapon) + "\n" +
                 separator +
                 "║ " + formatLine(inventoryHeader + inventory.toString()) + "\n" +
                 borderBottom;

@@ -10,6 +10,7 @@ import java.util.Map;
 import java.util.Scanner;
 import java.util.StringTokenizer;
 import pickups.foods.*;
+import pickups.wieldables.FistsofFury;
 import pickups.wieldables.Wieldable;
 
 public class World {
@@ -196,7 +197,17 @@ public class World {
 
 
     private void wield(String weapon) {
-        // Check if the weapon is a valid weapon type (axe, fistsoffury, sword)
+        if (weapon.equals("fistsoffury")) {
+            // The player can always equip "Fists of Fury"
+            Wieldable fistsOfFury = new FistsofFury("You'll settle this with your bare hands!", 1, 15);
+            player.setWeapon(fistsOfFury);
+            System.out.println("Description: "+fistsOfFury.getDescription());
+            System.out.println("You prepared your Fists of Fury for battle.");
+            System.out.println("Low: "+fistsOfFury.getLow() + " High: "+fistsOfFury.getHigh()+"\n");
+            return; // Exit the method after equipping
+        }
+
+        // Check if the weapon is a valid weapon type (axe, sword) and exists in the player's inventory
         if (isValidWeaponType(weapon)) {
             // Determine the selected weapon pickup
             Pickup weaponPickup = player.getInventory().select(weapon);
@@ -205,18 +216,23 @@ public class World {
                 Wieldable weaponItem = (Wieldable) weaponPickup;
                 // Equip the player with the weapon
                 player.setWeapon(weaponItem);
-
+                System.out.println("Description: "+weaponItem.getDescription());
                 System.out.println("You wielded the " + weapon + " for battle.");
+                System.out.println("Low: "+weaponItem.getLow() + " High: "+weaponItem.getHigh()+"\n");
+
+            } else {
+                System.out.println("You cannot wield this item as a weapon or you don't have that weapon in your inventory.");
             }
         } else {
             System.out.println("Invalid weapon item.");
         }
     }
 
-    // Check if the input is a valid weapon type
+    // Modify the isValidWeaponType to exclude "fistsoffury"
     private boolean isValidWeaponType(String weapon) {
-        return weapon.equals("axe") || weapon.equals("fistsoffury") || weapon.equals("sword");
+        return weapon.equals("axe") || weapon.equals("sword");
     }
+
 
     private void open(String chest) {
         // Handle the open logic
@@ -335,7 +351,7 @@ public class World {
 
                 // Display information about the admired item and confidence increase
                 System.out.println("You admired " + valuable);
-                System.out.println("Desc: " + valuable.getDescription());
+                System.out.println("Description: " + valuable.getDescription());
                 System.out.println("Your confidence increased by " + valuable.getValue());
 
                 // Display previous vs new confidence value

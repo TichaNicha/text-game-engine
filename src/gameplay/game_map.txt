@@ -3,7 +3,7 @@ contains chalice, coin
 contains ogre
 
 room 2
-contains mobile, jewel
+contains mobile, jewel, axe
 
 room 3
 contains mead
