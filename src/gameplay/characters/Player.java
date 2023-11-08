@@ -21,11 +21,11 @@ public class Player extends Character
         super("It's you! The player!!!! What else is there to explain..", health);
         this.name=name;
         this.confidence=confidence;
-        this.weapon=null;
+        this.weapon=new FistsofFury("You'll settle this with your bare hands!",1, 15);
         this.inventory = new Inventory();
     }
 
-    public String displayStats() {
+    public String stats() {
         String playerName = "Name: " + this.getName();
         String playerHP = "HP: " + this.getHp();
         String playerConfidence = "Confidence Points: " + this.getConfidence();
@@ -33,8 +33,9 @@ public class Player extends Character
         String inventory = "Inventory: " + this.getInventory();
 
         String border = "╔══════════════════════════════════════════════╗\n";
-        String header = "║              Adventurer Card               ║\n";
-        String separator = "║--------------------------------------------║\n";
+        String borderBottom = "╚══════════════════════════════════════════════╝\n";
+        String header = "║              Adventurer Card                 ║\n";
+        String separator = "║----------------------------------------------║\n";
 
         // combine info
         String adventurerCard = border +
@@ -57,7 +58,7 @@ public class Player extends Character
 
     // Format each line to a consistent length
     private String formatLine(String line) {
-        int totalLength = 44; // Total width of each line
+        int totalLength = 48; // Total width of each line
         int lineLength = line.length();
         int padding = totalLength - lineLength - 2; // Subtract 2 for the leading and trailing border
 

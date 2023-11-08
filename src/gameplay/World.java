@@ -255,6 +255,7 @@ public class World {
 
     private void displayStats() {
         // Handle the display stats logic
+        System.out.println(this.player.stats());;
     }
 
     private void displayHelp() {
