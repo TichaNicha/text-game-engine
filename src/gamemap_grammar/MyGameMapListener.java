@@ -21,10 +21,16 @@ import java.util.*;
 
 public class MyGameMapListener extends GameMapBaseListener {
     private World world = new World(); // Initialize the world
-    private List<Room> allRooms = new ArrayList<>(); // List to store all rooms
+    private Map<String, Room> allRooms = new HashMap<>(); // Map to store all rooms
     private Room currentRoom = new Room();
     private Inventory currentContents = new Inventory();
     private List<Room> connectingRooms;
+
+    @Override
+    public void enterRoom(GameMapParser.RoomContext ctx) {
+        this.currentRoom = new Room();
+        this.currentContents = new Inventory();
+    }
 
     @Override
     public void exitRoom(GameMapParser.RoomContext ctx) {
@@ -34,7 +40,7 @@ public class MyGameMapListener extends GameMapBaseListener {
             currentRoom.setFinalRoom(true);
         }
 
-        allRooms.add(currentRoom); // Add the currentRoom to the list
+        allRooms.put(ctx.ID().getText(), currentRoom); // Add the currentRoom to the list
 
     }
 
@@ -95,9 +101,7 @@ public class MyGameMapListener extends GameMapBaseListener {
     public void exitConnection(GameMapParser.ConnectionContext ctx) {
         String roomId = ctx.ID(0).getText(); // Get the current room's ID
 
-        // Create a new room for this connection
-        Room newRoom = new Room();
-        newRoom.setId(roomId);
+        Room selectedRoom = allRooms.get(roomId);
 
         // Initialize a list to store connected room objects
         List<Room> connectedRooms = new ArrayList<>();
@@ -107,7 +111,7 @@ public class MyGameMapListener extends GameMapBaseListener {
             String connectedRoomId = idTerminal.getText();
 
             // Find the connected room in the allRooms array
-            for (Room room : allRooms) {
+            for (Room room : allRooms.values()) {
                 if (room.getId().equals(connectedRoomId)) {
                     connectedRooms.add(room);
                     break;
@@ -116,13 +120,13 @@ public class MyGameMapListener extends GameMapBaseListener {
         }
 
         // Update the newRoom with the list of connected rooms
-        newRoom.setConnectingRooms(connectedRooms);
+        selectedRoom.setConnectingRooms(connectedRooms);
 
         // Add the newRoom to your world
-        world.addRoom(newRoom.getId(), newRoom);
-        allRooms.add(newRoom);
+        world.addRoom(selectedRoom.getId(), selectedRoom);
+        allRooms.put(selectedRoom.getId(), selectedRoom);
 
-        System.out.println(newRoom);
+        System.out.println(selectedRoom);
     }
 
 
