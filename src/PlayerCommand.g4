@@ -32,10 +32,8 @@ statsCommand: 'stats';
 helpCommand: 'help';
 
 // Lexer rules
-WORD: .+;
+WORD: ~[ \t\r\n]+;
 
 // Skip spaces and tabs
 WS: [ \t\r\n]+ -> skip;
 NEWLINE: '\r'? '\n'; // return newlines to parser (is end-statement signal)
-
-InvalidCommand: . { $channel = HIDDEN; System.err.close(); } ;

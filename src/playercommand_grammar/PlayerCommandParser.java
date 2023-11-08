@@ -18,7 +18,7 @@ public class PlayerCommandParser extends Parser {
 		new PredictionContextCache();
 	public static final int
 		T__0=1, T__1=2, T__2=3, T__3=4, T__4=5, T__5=6, T__6=7, T__7=8, T__8=9, 
-		T__9=10, T__10=11, WORD=12, WS=13, NEWLINE=14, InvalidCommand=15;
+		T__9=10, T__10=11, WORD=12, WS=13, NEWLINE=14;
 	public static final int
 		RULE_start = 0, RULE_command = 1, RULE_battleCommand = 2, RULE_exploreCommand = 3, 
 		RULE_pickupCommand = 4, RULE_admireCommand = 5, RULE_eatCommand = 6, RULE_wieldCommand = 7, 
@@ -43,7 +43,7 @@ public class PlayerCommandParser extends Parser {
 	private static String[] makeSymbolicNames() {
 		return new String[] {
 			null, null, null, null, null, null, null, null, null, null, null, null, 
-			"WORD", "WS", "NEWLINE", "InvalidCommand"
+			"WORD", "WS", "NEWLINE"
 		};
 	}
 	private static final String[] _SYMBOLIC_NAMES = makeSymbolicNames();
@@ -838,7 +838,7 @@ public class PlayerCommandParser extends Parser {
 	}
 
 	public static final String _serializedATN =
-		"\u0004\u0001\u000fK\u0002\u0000\u0007\u0000\u0002\u0001\u0007\u0001\u0002"+
+		"\u0004\u0001\u000eK\u0002\u0000\u0007\u0000\u0002\u0001\u0007\u0001\u0002"+
 		"\u0002\u0007\u0002\u0002\u0003\u0007\u0003\u0002\u0004\u0007\u0004\u0002"+
 		"\u0005\u0007\u0005\u0002\u0006\u0007\u0006\u0002\u0007\u0007\u0007\u0002"+
 		"\b\u0007\b\u0002\t\u0007\t\u0002\n\u0007\n\u0002\u000b\u0007\u000b\u0002"+

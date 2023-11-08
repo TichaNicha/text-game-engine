@@ -12,7 +12,6 @@ T__10=11
 WORD=12
 WS=13
 NEWLINE=14
-InvalidCommand=15
 ' dd'=1
 'pickup'=2
 'admire'=3
