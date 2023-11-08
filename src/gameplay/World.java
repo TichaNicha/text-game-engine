@@ -25,6 +25,56 @@ import playercommand_grammar.PlayerCommandParser;
 
 
 public class World {
+    public boolean isInBattleMode() {
+        return this.mode.equals(PlayMode.battle);
+    }
+
+    public void displayBattleHelp() {
+        System.out.println("Battle Mode Commands:");
+        System.out.println("--------------------------------------------------------");
+        System.out.println("attack monster - Attacks the monster in the room using the wielded weapon");
+        System.out.println("wield weapon - Wields a weapon from inventory for battle.");
+        System.out.println("wield fistsoffury - Wields fists of fury (doesnt appear in inventory).");
+        System.out.println("help - Display available commands in this mode.");
+
+        System.out.println("--------------------------------------------------------");
+    }
+
+    public boolean attackMonster(String monsterName) {
+        // Check if you are in battle mode
+        if (isInBattleMode()) {
+            // Iterate through battle monsters in the current room
+            for (Monster monster : battleMonsters) {
+                if (monster.getId().equalsIgnoreCase(monsterName)) {
+                    // Monster attacks you
+                    player.defendAttack(monster);
+                    // Check if monster is defeated
+                    if (monster.getHp() <= 0) {
+                        // Player wins the battle
+                        currentRoom.removeMonster(monster);
+                        return true;
+                    } else if (player.getHp() <= 0) {
+                        // Monster wins the battle
+                        this.gameOver();
+                        return true;
+                    }
+                    // It's a draw, neither wins
+                    return false;
+                }
+            }
+        }
+        // Monster not found or not in battle mode
+        return false;
+    }
+
+    private void gameOver() {
+        System.out.println("The monster beat you up so bad you are literally dead");
+        System.out.println("Is this the end of your journey..?");
+        System.out.println("GAME OVER");
+        System.exit(0);
+    }
+
+
     public enum PlayMode {battle, explore;}
 
     // A data structure to store rooms (e.g., a map from room names to Room objects)
@@ -299,7 +349,7 @@ public class World {
         System.out.println(this.player.stats());;
     }
 
-    public void displayHelp() {
+    public void displayExploreHelp() {
             System.out.println("Explore Mode Commands:");
             System.out.println("--------------------------------------------------------");
             System.out.println("door n - Opens door labeled n and enters the room.");

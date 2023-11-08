@@ -128,4 +128,29 @@ public class Room extends Entity{
         pickupsInRoom.add(pickup);
     }
 
+    public void removeMonster(Monster monsterToRemove) {
+        int indexToRemove = -1;
+
+        // Find the index of the monster to remove
+        for (int i = 0; i < monsters.length; i++) {
+            if (monsters[i] == monsterToRemove) {
+                indexToRemove = i;
+                break;
+            }
+        }
+
+        if (indexToRemove != -1) {
+            // Create a new array to hold the monsters without the one to remove
+            Monster[] updatedMonsters = new Monster[monsters.length - 1];
+
+            // Copy elements before the one to remove
+            System.arraycopy(monsters, 0, updatedMonsters, 0, indexToRemove);
+
+            // Copy elements after the one to remove
+            System.arraycopy(monsters, indexToRemove + 1, updatedMonsters, indexToRemove, monsters.length - indexToRemove - 1);
+
+            monsters = updatedMonsters;
+        }
+    }
+
 }

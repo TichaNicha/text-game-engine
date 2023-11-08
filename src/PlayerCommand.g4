@@ -26,8 +26,6 @@ commonCommands:
     helpCommand
     | wieldCommand;
 
-
-
 pickupCommand: 'pickup' WORD;
 admireCommand: 'admire' WORD;
 eatCommand: 'eat' WORD;

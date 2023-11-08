@@ -82,9 +82,37 @@ public class MyCommandVisitor extends PlayerCommandBaseVisitor<String> {
 
     @Override
     public String visitHelpCommand(PlayerCommandParser.HelpCommandContext ctx) {
-        world.displayHelp();
+        if (world.isInBattleMode()) {
+            // Handle help for battle mode
+            world.displayBattleHelp();
+        } else {
+            // Handle help for explore mode
+            world.displayExploreHelp();
+        }
         return null;
     }
+
+    @Override
+    public String visitAttackCommand(PlayerCommandParser.AttackCommandContext ctx) {
+        if (world.isInBattleMode()){
+            String monsterName = ctx.WORD().getText();
+            // Implement the logic to find the monster and attack it
+            boolean successfulAttack = world.attackMonster(monsterName);
+
+            if (successfulAttack) {
+                // Handle a successful attack
+                System.out.println("You successfully attacked the monster!");
+            } else {
+                // Handle an unsuccessful attack (monster not found, etc.)
+                System.out.println("You.. Unsuccessfully attacked the monster.");
+            }
+        } else{
+            System.out.println("There's nothing to attack!");
+        }
+        return null;
+    }
+
+
 
     // Handle invalid commands
     @Override
