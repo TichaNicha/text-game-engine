@@ -150,13 +150,13 @@ public class MyGameMapListener extends GameMapBaseListener {
 
             if (pickupType.equals("axe")) {
                 pickup = new Axe("Axe. Like the deodorant!",
-                        3, 6);
+                        6, 20);
             } else if (pickupType.equals("fistsoffury")) {
                 pickup = new FistsofFury("You'll settle this with your bare hands!"
                 ,1, 15);
             } else if (pickupType.equals("sword")) {
                 pickup = new Sword("A sword. The most consistent thing ever.",
-                        4,5);
+                        10,30);
             } else if (pickupType.equals("chalice")) {
                 pickup = new Chalice("Drinking out of it makes your water taste like metal.");
             } else if (pickupType.equals("moneybag")) {
@@ -192,13 +192,13 @@ public class MyGameMapListener extends GameMapBaseListener {
         // Create and return the appropriate monster object based on the type
         if (type.equals("dragon") || type.equals("[dragon]")) {
             return new Dragon("A beast that dominates the skies and decimates the land.",
-                    70, 90, 10);
+                    150, 90, 15);
         } else if (type.equals("ogre") || type.equals("[ogre]")) {
             return new Ogre("A man-eating monster that preys on weak adventurers.",
-                    30, 50, 5);
+                    30, 50, 8);
         } else if (type.equals("zombie") || type.equals("[zombie]")) {
             return new Zombie("An undead adventurer significantly weaker than when it used to be alive.",
-                    15, 70, 3);
+                    15, 70, 5);
         }
         return null; // Handle the case when the type is not recognized
     }

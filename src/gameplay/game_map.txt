@@ -1,22 +1,54 @@
 room 1
-contains chalice, coin, key, lockpick
+contains chalice, coin, lockpick, chalice
 contains ogre
 
 room 2
-contains mobile, jewel, axe
+contains mobile, jewel, axe, key
 contains zombie
 
 room 3
-contains mead
+contains mead, bread
 contains treasurechest with coin, coin, coin
 contains ogre
 
 room 4
+contains moneybag, ring
 contains warchest with sword
+
+room 5
+contains roastboar, key
+contains treasurechest with coin, coin, coin
+contains ogre
+
+room 6
+contains treasurechest with goldbars, coin
+contains zombie
+
+room 7
+contains lockpick, key
+contains warchest with axe
+
+room 8
+contains coin, coin
+contains ogre
+
+room 9
+contains chalice, roastboar
+contains zombie
+
+room 10
+contains mead
+contains treasurechest with mobile
 contains dragon
 is exit
 
 room 1 connects to 2, 3, 4
-room 2 connects to 1
-room 3 connects to 1
+room 2 connects to 1, 6
+room 3 connects to 1, 5
 room 4 connects to 1
+room 5 connects to 3, 7, 8, 9
+room 6 connects to 2
+room 7 connects to 5
+room 8 connects to 5, 10
+room 9 connects to 5
+room 10 connects to 8

@@ -486,32 +486,36 @@ public class World {
         // Check if the item exists in the player's inventory
         Pickup admiredItem = playerInventory.select(item);
 
-        if (admiredItem != null) {
-            // Check if the item is a Valuable
-            if (admiredItem instanceof Valuable && !((Valuable) admiredItem).getConsumed()) {
-                Valuable valuable = (Valuable) admiredItem;
+// Check if the item exists in the player's inventory
+// Check if the item exists in the player's inventory
+        List<Pickup> admiredItems = playerInventory.selectAll(item);
 
-                // Admire the valuable item and consume it
-                int previousConfidence = player.getConfidence();
-                player.Admire(valuable);
-                valuable.Consume();
+        if (!admiredItems.isEmpty()) {
+            for (Pickup pickup : admiredItems) {
+                if (pickup instanceof Valuable && !((Valuable) pickup).getConsumed()) {
+                    Valuable valuable = (Valuable) pickup;
 
-                // Display information about the admired item and confidence increase
-                System.out.println("You admired " + valuable);
-                System.out.println("Description: " + valuable.getDescription());
-                System.out.println("Your confidence increased by " + valuable.getValue());
+                    // Admire the valuable item and consume it
+                    int previousConfidence = player.getConfidence();
+                    player.Admire(valuable);
+                    valuable.Consume();
 
-                // Display previous vs new confidence value
-                int newConfidence = player.getConfidence();
-                System.out.println("Previous Confidence: " + previousConfidence);
-                System.out.println("New Confidence: " + newConfidence);
-                System.out.println("--------------------------------------------------------");
-            } else {
-                System.out.println("You cannot admire this item.");
+                    // Display information about the admired item and confidence increase
+                    System.out.println("You admired " + valuable);
+                    System.out.println("Description: " + valuable.getDescription());
+                    System.out.println("Your confidence increased by " + valuable.getValue());
+
+                    // Display previous vs new confidence value
+                    int newConfidence = player.getConfidence();
+                    System.out.println("Previous Confidence: " + previousConfidence);
+                    System.out.println("New Confidence: " + newConfidence);
+                    System.out.println("--------------------------------------------------------");
+                }
             }
         } else {
-            System.out.println("Item not found in your inventory.");
+            System.out.println("No unadmired items found in your inventory.");
         }
+
     }
 
 

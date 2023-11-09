@@ -73,7 +73,7 @@ public class Player extends Character
                 " " + formatLine(playerConfidence) + "\n" +
                 " " + formatLine(equippedWeapon) + "\n" +
                 separator +
-                " " + formatLine(inventoryHeader + inventory.toString()) + "\n" +
+                " " + inventoryHeader + inventory.toString() + "\n" +
                 borderBottom;
 
         return adventurerCard;

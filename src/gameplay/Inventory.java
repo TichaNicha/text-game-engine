@@ -92,4 +92,16 @@ public class Inventory
 	public boolean isEmpty() {
 		return this.items.isEmpty();
 	}
+
+	public List<Pickup> selectAll(String item) {
+		List<Pickup> selectedItems = new ArrayList<>();
+
+		for (Pickup pickup : items) {
+			if (pickup.getId().equalsIgnoreCase(item)) {
+				selectedItems.add(pickup);
+			}
+		}
+
+		return selectedItems;
+	}
 }

@@ -12,7 +12,7 @@ openableContents: 'contains' OPENABLE_TYPE 'with' pickupList;
 OPENABLE_TYPE: 'warchest' | 'treasurechest';
 monsters: 'contains' monsterList;
 roomType: 'is' ROOMTYPE;
-ID: [0-9];
+ID: [0-9]+;
 PICKUP: WIELDABLE | CONSUMABLE | OPENER | VALUABLE;
 WIELDABLE: 'axe' | 'fistsoffury' | 'sword';
 CONSUMABLE: VALUABLE | FOOD;
