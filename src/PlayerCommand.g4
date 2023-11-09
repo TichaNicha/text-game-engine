@@ -20,7 +20,8 @@ exploreCommand:
 
 battleCommand:
     commonCommands
-    | attackCommand;
+    | attackCommand
+    | talkCommand;
 
 commonCommands:
     helpCommand
@@ -37,6 +38,7 @@ describeCommand: 'describe';
 statsCommand: 'stats';
 helpCommand: 'help';
 
+talkCommand: 'talk';
 attackCommand: 'attack' WORD; // Added for battle mode
 
 // Lexer rules

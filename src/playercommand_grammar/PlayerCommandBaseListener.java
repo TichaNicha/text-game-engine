@@ -197,6 +197,18 @@ public class PlayerCommandBaseListener implements PlayerCommandListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterTalkCommand(PlayerCommandParser.TalkCommandContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitTalkCommand(PlayerCommandParser.TalkCommandContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterAttackCommand(PlayerCommandParser.AttackCommandContext ctx) { }
 	/**
 	 * {@inheritDoc}

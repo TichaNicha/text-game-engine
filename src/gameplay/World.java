@@ -16,7 +16,7 @@ import java.util.*;
 import pickups.foods.*;
 import pickups.wieldables.FistsofFury;
 import pickups.wieldables.Wieldable;
-// Import the generated classes
+
 import org.antlr.v4.runtime.*;
 import org.antlr.v4.runtime.tree.*;
 import playercommand_grammar.MyCommandVisitor;
@@ -35,6 +35,7 @@ public class World {
         System.out.println("attack monster - Attacks the monster in the room using the wielded weapon");
         System.out.println("wield weapon - Wields a weapon from inventory for battle.");
         System.out.println("wield fistsoffury - Wields fists of fury (doesnt appear in inventory).");
+        System.out.println("talk - Attempt to talk to a monster.");
         System.out.println("help - Display available commands in this mode.");
 
         System.out.println("--------------------------------------------------------");
@@ -108,6 +109,50 @@ public class World {
         System.out.println("Is this the end of your journey..?");
         System.out.println("GAME OVER");
         System.exit(0);
+    }
+
+    public void talkToMonster() {
+        if (isInBattleMode()) {
+            // Check if there is a monster to talk to in battleMonsters list
+            if (battleMonsters.isEmpty()) {
+                System.out.println("There are no monsters to talk to.");
+                return;
+            }
+
+            // Get the first monster in the list
+            Monster monsterToTalkTo = battleMonsters.get(0);
+
+            // Talk to the monster
+            int monsterAtk = player.defendAttack(monsterToTalkTo);
+
+            System.out.println("The monster attacks the player for " + monsterAtk + " hp!\n");
+
+            monsterToTalkTo.talk();
+
+
+            // Check if player's HP is less than or equal to 0, and end the game if it is
+            if (player.getHp() <= 0) {
+                this.gameOver();
+                return;
+            }
+            // Check if the monster's dialogue is finished
+            if (monsterToTalkTo.isDialogueFinished()) {
+
+                // Exit battle mode
+                this.mode = PlayMode.explore;
+
+                // Remove the monster from battleMonsters list
+                battleMonsters.remove(monsterToTalkTo);
+
+                // Player wins the battle
+                currentRoom.removeMonster(monsterToTalkTo);
+                System.out.println("Player uses the power of words to defeat the monster!\n");
+                System.out.println(this.currentRoom);
+                this.mode = PlayMode.explore;
+            }
+        } else {
+            System.out.println("You can't talk to monsters when you're not in battle mode!");
+        }
     }
 
 

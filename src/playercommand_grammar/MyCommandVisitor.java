@@ -141,6 +141,15 @@ public class MyCommandVisitor extends PlayerCommandBaseVisitor<String> {
     }
 
 
+    @Override
+    public String visitTalkCommand(PlayerCommandParser.TalkCommandContext ctx) {
+        if (world.isInBattleMode()){
+            world.talkToMonster();
+        } else{
+            System.out.println("There's no one to talk to..");
+        }
+        return null;
+    }
 
     // Handle invalid commands
     @Override

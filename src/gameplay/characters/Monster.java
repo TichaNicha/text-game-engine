@@ -3,6 +3,30 @@ package gameplay.characters;
 public class Monster extends Character{
 
     private int appearanceChance;
+
+    public boolean isDialogueFinished() {
+        return dialogueFinished;
+    }
+
+    public void setDialogueFinished(boolean dialogueFinished) {
+        this.dialogueFinished = dialogueFinished;
+    }
+
+    private boolean dialogueFinished = false;
+
+    public void setAppearanceChance(int appearanceChance) {
+        this.appearanceChance = appearanceChance;
+    }
+
+    public int getDialogueCounter() {
+        return dialogueCounter;
+    }
+
+    public void setDialogueCounter(int dialogueCounter) {
+        this.dialogueCounter = dialogueCounter;
+    }
+
+    private int dialogueCounter = 0;
     private int atkDmg;
 
     public Monster(String desc, int hp, int appearanceChance, int atkDmg) {
@@ -45,5 +69,18 @@ public class Monster extends Character{
 
     public void setAtkDmg(int atkDmg) {
         this.atkDmg = atkDmg;
+    }
+    // Increment the dialogue counter
+    public void incrementDialogueCounter() {
+        dialogueCounter++;
+    }
+
+    public void talk(){
+
+    }
+
+    // Reset the dialogue counter to 0
+    public void resetDialogueCounter() {
+        dialogueCounter = 0;
     }
 }

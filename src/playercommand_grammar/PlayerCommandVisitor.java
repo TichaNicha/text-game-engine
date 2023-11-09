@@ -101,6 +101,12 @@ public interface PlayerCommandVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitHelpCommand(PlayerCommandParser.HelpCommandContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link PlayerCommandParser#talkCommand}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitTalkCommand(PlayerCommandParser.TalkCommandContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link PlayerCommandParser#attackCommand}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
