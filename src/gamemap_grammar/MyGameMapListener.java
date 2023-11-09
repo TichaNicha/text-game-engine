@@ -192,13 +192,13 @@ public class MyGameMapListener extends GameMapBaseListener {
         // Create and return the appropriate monster object based on the type
         if (type.equals("dragon") || type.equals("[dragon]")) {
             return new Dragon("A beast that dominates the skies and decimates the land.",
-                    150, 90, 15);
+                    100, 99, 15);
         } else if (type.equals("ogre") || type.equals("[ogre]")) {
             return new Ogre("A man-eating monster that preys on weak adventurers.",
-                    30, 50, 8);
+                    30, 50, 6);
         } else if (type.equals("zombie") || type.equals("[zombie]")) {
             return new Zombie("An undead adventurer significantly weaker than when it used to be alive.",
-                    15, 70, 5);
+                    15, 70, 3);
         }
         return null; // Handle the case when the type is not recognized
     }

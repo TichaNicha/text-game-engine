@@ -131,7 +131,13 @@ public class Player extends Character
     }
 
     public void setConfidence(int confidence) {
-        this.confidence = confidence;
+        if (confidence < 0){
+            this.confidence = 0;
+        } else{
+            this.confidence = confidence;
+
+        }
+
     }
 
     public String getName() {

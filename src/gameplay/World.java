@@ -93,15 +93,14 @@ public class World {
         System.out.println("The monster attacks the player for " + monsterAtk + " hp!\n");
 
         // Check if monster is defeated
-        if (targetMonster.getHp() <= 0) {
+        if (player.getHp() <= 0) {
+            this.gameOver();
+        } else if (targetMonster.getHp() <= 0) {
             // Player wins the battle
             currentRoom.removeMonster(targetMonster);
             System.out.println("Player defeats the monster!\n");
             System.out.println(this.currentRoom);
             this.mode = PlayMode.explore;
-        } else if (player.getHp() <= 0) {
-            // Monster wins the battle
-            this.gameOver();
         }
     }
 
@@ -510,6 +509,8 @@ public class World {
                     System.out.println("Previous Confidence: " + previousConfidence);
                     System.out.println("New Confidence: " + newConfidence);
                     System.out.println("--------------------------------------------------------");
+                } else{
+                    System.out.println("Usage: admire <unadmired valuable>");
                 }
             }
         } else {

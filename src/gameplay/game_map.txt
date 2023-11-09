@@ -1,5 +1,5 @@
 room 1
-contains chalice, coin, lockpick, chalice
+contains mead, bread, coin, lockpick
 contains ogre
 
 room 2
@@ -8,19 +8,20 @@ contains zombie
 
 room 3
 contains mead, bread
-contains treasurechest with coin, coin, coin
+contains treasurechest with mobile, goldbars, coin
 contains ogre
 
 room 4
-contains moneybag, ring
+contains moneybag, ring, roastboar
 contains warchest with sword
 
 room 5
 contains roastboar, key
 contains treasurechest with coin, coin, coin
-contains ogre
+contains zombie
 
 room 6
+contains roastboar
 contains treasurechest with goldbars, coin
 contains zombie
 
