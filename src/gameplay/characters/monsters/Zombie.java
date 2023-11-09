@@ -1,3 +1,7 @@
+/**
+ * Zombie class contains dialogue for talking and constructor
+ * @author Nicha Techatassanasoontorn 21139671
+ **/
 package gameplay.characters.monsters;
 
 import gameplay.characters.Monster;

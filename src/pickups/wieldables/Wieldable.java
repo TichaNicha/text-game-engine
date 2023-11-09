@@ -1,3 +1,7 @@
+/**
+ * Wieldable has a low and high value. When the user attacks a random value is returned between the low and high value.
+ * @author Nicha Techatassanasoontorn 21139671
+ **/
 package pickups.wieldables;
 
 import pickups.Pickup;

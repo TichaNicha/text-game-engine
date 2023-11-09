@@ -1,3 +1,7 @@
+/**
+ * ReadWorldDataFile is a class that reads a txt file and parses it using the gamemap_grammar to create a game map
+ * @author Nicha Techatassanasoontorn 21139671
+ **/
 package gameplay;
 
 import gamemap_grammar.*;

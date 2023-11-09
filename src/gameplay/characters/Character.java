@@ -1,3 +1,7 @@
+/**
+ * Character class contains basic attack/defend functions
+ * @author Nicha Techatassanasoontorn 21139671
+ **/
 package gameplay.characters;
 
 import gameplay.Entity;

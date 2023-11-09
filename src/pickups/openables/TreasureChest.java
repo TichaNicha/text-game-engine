@@ -1,3 +1,7 @@
+/**
+ * TreasureChest extends Openable and can be unlocked with a key object.
+ * @author Nicha Techatassanasoontorn 21139671
+ **/
 package pickups.openables;
 
 import gameplay.Inventory;

@@ -1,6 +1,6 @@
 /**
- * An abstract class with fields for description and id.
- * Has functions to generate a random number and compare ids (ignoring case).
+ * Entity is an abstract class that represents game entities with fields for description and id.
+ * It includes methods to generate random numbers and compare entity ids (ignoring case).
  * @author Nicha Techatassanasoontorn 21139671
  **/
 package gameplay;

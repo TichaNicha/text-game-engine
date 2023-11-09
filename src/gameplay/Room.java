@@ -1,3 +1,7 @@
+/**
+ * Room class contains information about connecting rooms, monsters, and pickups in the room. It also contains getters and setters for all entities in the room.
+ * @author Nicha Techatassanasoontorn 21139671
+ **/
 package gameplay;
 
 import gameplay.characters.Monster;

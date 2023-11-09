@@ -1,3 +1,7 @@
+/**
+ * Openable is an abstract class describing an openable object that can be unlocked and its pickup contents can be returned
+ * @author Nicha Techatassanasoontorn 21139671
+ **/
 package pickups.openables;
 
 import gameplay.Inventory;

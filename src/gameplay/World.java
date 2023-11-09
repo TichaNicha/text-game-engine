@@ -1,4 +1,7 @@
-
+/**
+ * World is a class that contains all the player commands and game logic.
+ * @author Nicha Techatassanasoontorn 21139671
+ **/
 package gameplay;
 
 import gameplay.characters.Monster;
@@ -218,6 +221,8 @@ public class World {
 
         }
     }
+
+
 
     // Add a room to the game world
     public void addRoom(String roomName, Room room) {

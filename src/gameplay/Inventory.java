@@ -1,4 +1,7 @@
-
+/**
+ * Inventory is a class that stores an arraylist of pickups
+ * @author Nicha Techatassanasoontorn 21139671
+ **/
 package gameplay;
 
 import java.util.ArrayList;

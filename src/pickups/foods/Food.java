@@ -1,3 +1,7 @@
+/**
+ * Food is a class that stores an int representing its hp restored once eaten
+ * @author Nicha Techatassanasoontorn 21139671
+ **/
 package pickups.foods;
 
 import pickups.Consumable;

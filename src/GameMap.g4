@@ -25,4 +25,4 @@ monsterList: MONSTER (',' MONSTER)*;
 WS: [ \t\r\n]+ -> skip;
 COMMENT: '//' ~[\r\n]* -> skip;
 ERR: . -> skip;
-NEWLINE: '\r'? '\n'; // return newlines to parser (is end-statement signal)
+NEWLINE: '\r'? '\n';

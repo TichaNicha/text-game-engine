@@ -1,3 +1,7 @@
+/**
+ * Player class contains stats, admiring, and get/set weapon functions
+ * @author Nicha Techatassanasoontorn 21139671
+ **/
 package gameplay.characters;
 
 import gameplay.Inventory;

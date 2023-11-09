@@ -1,3 +1,7 @@
+/**
+ * Pickup extends Entity.
+ * @author Nicha Techatassanasoontorn 21139671
+ **/
 package pickups;
 
 import gameplay.Entity;

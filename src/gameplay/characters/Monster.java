@@ -1,3 +1,7 @@
+/**
+ * Monster class contains flags for continue attacking and functions for monster appearing in room
+ * @author Nicha Techatassanasoontorn 21139671
+ **/
 package gameplay.characters;
 
 public class Monster extends Character{

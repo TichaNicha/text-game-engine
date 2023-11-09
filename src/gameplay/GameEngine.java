@@ -1,3 +1,7 @@
+/**
+ * GameEngine is a class where main gameplay takes place. A player object is passed into world.play to start playing the game
+ * @author Nicha Techatassanasoontorn 21139671
+ **/
 package gameplay;
 
 import gameplay.characters.Player;

@@ -1,3 +1,7 @@
+/**
+ * Sword extends Wieldable.
+ * @author Nicha Techatassanasoontorn 21139671
+ **/
 package pickups.wieldables;
 
 public class Sword extends Wieldable {

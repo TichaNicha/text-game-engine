@@ -1,3 +1,7 @@
+/**
+ * Valuable is a class that stores the valuable variable of an object.
+ * @author Nicha Techatassanasoontorn 21139671
+ **/
 package pickups.valuables;
 
 import pickups.Consumable;
