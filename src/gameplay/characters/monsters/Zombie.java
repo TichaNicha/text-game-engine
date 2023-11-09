@@ -27,6 +27,7 @@ public class Zombie extends Monster {
             case 4:
                 System.out.println(">:( (The zombie runs away looking very angry.. What did you say?)"); // smiley face :)
                 this.setDialogueFinished(true);
+                this.setContinueAttacking(false);
                 break;
             default:
                 System.out.println("...");

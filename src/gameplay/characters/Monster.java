@@ -4,6 +4,16 @@ public class Monster extends Character{
 
     private int appearanceChance;
 
+    public boolean isContinueAttacking() {
+        return continueAttacking;
+    }
+
+    public void setContinueAttacking(boolean continueAttacking) {
+        this.continueAttacking = continueAttacking;
+    }
+
+    private boolean continueAttacking = true;
+
     public boolean isDialogueFinished() {
         return dialogueFinished;
     }

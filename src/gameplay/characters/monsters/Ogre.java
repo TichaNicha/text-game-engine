@@ -1,6 +1,9 @@
 package gameplay.characters.monsters;
 
+import gameplay.Inventory;
 import gameplay.characters.Monster;
+import gameplay.characters.Player;
+import pickups.valuables.Valuable;
 
 public class Ogre extends Monster {
     public Ogre(String desc, int hp, int appearanceChance, int atkDmg) {
@@ -13,26 +16,24 @@ public class Ogre extends Monster {
         System.out.print("Ogre: ");
         switch (this.getDialogueCounter()) {
             case 0:
-                System.out.println("ggrhruahhuh"); // ANOTHER ADVENTURER TRESPASSING IN MY HOUSE!?!
+                System.out.println("ANOTHER ADVENTURER TRESPASSING IN MY HOUSE!?! (Ogre grumbles)");
                 break;
             case 1:
-                System.out.println("ggruuuah?"); // GET OUT!!!
+                System.out.println("GET OUT!!! (Ogre's voice booms)");
                 break;
             case 2:
-                System.out.println("gogoruahahaha!"); // If player has a valuable in their inventory "HM? YOU'VE BROUGHT ME A GIFT?" // ogre stops attacking
-                // if player doesnt have valuable in their inventory ogre continues attacking "ITS ILLEGAL TO BE IN ONES HOUSE!!"
+                System.out.println("ITS ILLEGAL TO BE IN ONE'S HOUSE!! (Ogre continues attacking)"); // If the player doesn't have a valuable in their inventory
                 break;
             case 3:
-                System.out.println("graah!"); // HAHAHA DON'T MIND IF I DO (OGRE TAKES VALUABLE FROM PLAYERS INVENTORY) // ogre stops attacking
-                // if player didnt give ogre the valuable "HURRY UP AND LEAVE THIS PLACE!" // OGRE ATTACKS
+                System.out.println("HURRY UP AND LEAVE THIS PLACE!"); // If the player didn't give ogre the valuable
                 break;
             case 4:
-                System.out.println("RAAAH"); // STAY AS LONG AS YOU WISH ADVENTURER, CONSIDER IT THANKS FOR THE GIFT // ogre stops attacking
-                // if player didnt give ogre the valuable "IM DONE TALKING, TIME TO KILL YOU!" OGRE ATTACKS
+                System.out.println("IM DONE TALKING, TIME TO KILL YOU! (Ogre gets furious and attacks)");
                 this.setDialogueFinished(true);
+                this.setContinueAttacking(true);
                 break;
             default:
-                System.out.println("The ogre doesn't want to talk..");
+                System.out.println("The ogre doesn't want to talk anymore...");
                 break;
         }
 

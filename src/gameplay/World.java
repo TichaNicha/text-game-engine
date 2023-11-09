@@ -105,7 +105,7 @@ public class World {
 
 
     private void gameOver() {
-        System.out.println("The monster beat you up so bad you are literally dead");
+        System.out.println("\nThe monster beat you up so bad you are literally dead");
         System.out.println("Is this the end of your journey..?");
         System.out.println("GAME OVER");
         System.exit(0);
@@ -136,7 +136,7 @@ public class World {
                 return;
             }
             // Check if the monster's dialogue is finished
-            if (monsterToTalkTo.isDialogueFinished()) {
+            if (monsterToTalkTo.isDialogueFinished() && !monsterToTalkTo.isContinueAttacking()) {
 
                 // Exit battle mode
                 this.mode = PlayMode.explore;
